@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class DisplayInventory : MonoBehaviour
 {
-    public GameObject inventoryPrefab;
+    public GameObject slotPrefab;
 
     public InventorySO inventory;
 
@@ -21,49 +21,51 @@ public class DisplayInventory : MonoBehaviour
 
     public int columnNum;
 
-    Dictionary<InventorySlot, GameObject> displayDictionary = new Dictionary<InventorySlot, GameObject>();
+    Dictionary<GameObject, InventorySlot> displayDictionary = new Dictionary<GameObject, InventorySlot>();
     // Start is called before the first frame update
     void Start()
     {
-        CreateDisplay();
+        CreateInventorySlots();
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdateDisplay();
+        UpdateSlotsDisplay();
     }
 
-    public void CreateDisplay()
+    public void UpdateSlotsDisplay()
     {
-        for (int i = 0; i < inventory.slotsContainer.itemSlots.Count; i++)
+        foreach(KeyValuePair<GameObject, InventorySlot> slot in displayDictionary)
         {
-            ArrangeSlotByIndex(i);
-        }
-    }
-
-    public void UpdateDisplay()
-    {
-        for (int i = 0; i < inventory.slotsContainer.itemSlots.Count; i++)
-        {
-            if (displayDictionary.ContainsKey(inventory.slotsContainer.itemSlots[i]))
+            if(slot.Value.ID >= 0)
             {
-                displayDictionary[inventory.slotsContainer.itemSlots[i]].GetComponentInChildren<TextMeshProUGUI>().text = inventory.slotsContainer.itemSlots[i].amount.ToString("n0");
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.itemDatabase.GetItem[slot.Value.inventoryItem.ID].uiDisplay;
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = slot.Value.amount == 1 ? "" : slot.Value.amount.ToString("n0");
             }
             else
-                ArrangeSlotByIndex(i);
+            {
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+                slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+                slot.Key.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            }
         }
     }
 
-    public void ArrangeSlotByIndex(int index)
+    public void CreateInventorySlots()
     {
-        InventorySlot slot = inventory.slotsContainer.itemSlots[index];
-        var obj = Instantiate(inventoryPrefab, Vector3.zero, Quaternion.identity, transform);
-        obj.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.itemDatabase.GetItem[slot.inventoryItem.ID].uiDisplay;
-        obj.GetComponent<RectTransform>().localPosition = GetSlotPositionByIndex(index);
-        obj.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount.ToString("n0");
-        displayDictionary.Add(slot, obj);
+        displayDictionary = new Dictionary<GameObject, InventorySlot>();
+        for (int i = 0; i < inventory.slotsContainer.itemSlots.Length; i++)
+        {
+            var obj = Instantiate(slotPrefab, Vector3.zero, Quaternion.identity, transform);
+            obj.GetComponent<RectTransform>().localPosition = GetSlotPositionByIndex(i);
+
+            displayDictionary.Add(obj, inventory.slotsContainer.itemSlots[i]);
+        }
     }
+
+   
     public Vector3 GetSlotPositionByIndex(int index)
     {
         return new Vector3

@@ -8,6 +8,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Progress;
+
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventorySO : ScriptableObject
 {
@@ -15,19 +17,33 @@ public class InventorySO : ScriptableObject
     public ItemDatabaseSO itemDatabase;
     public Inventory slotsContainer;
 
+
     public void AddItem(InventoryItem inventoryItem, int amount)
     {
-        for(int i = 0; i < slotsContainer.itemSlots.Count; i++)
+        for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
         {
-            if (slotsContainer.itemSlots[i].inventoryItem.ID == inventoryItem.ID && inventoryItem.isStackable)
+            if (slotsContainer.itemSlots[i].ID == inventoryItem.ID && inventoryItem.isStackable)
             {
                 slotsContainer.itemSlots[i].AddAmount(amount);
                 return;
             }
         }
-        slotsContainer.itemSlots.Add(new InventorySlot(inventoryItem.ID, inventoryItem, amount));
+        SetFirstEmptySlot(inventoryItem, amount);
     }
 
+    public InventorySlot SetFirstEmptySlot(InventoryItem inventoryItem, int amount)
+    {
+        for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
+        {
+            if (slotsContainer.itemSlots[i].ID == -1)
+            {
+                slotsContainer.itemSlots[i].UpdateSlot(inventoryItem.ID, inventoryItem, amount);
+                return slotsContainer.itemSlots[i];
+            }
+        }
+        //Do something if inventory is full
+        return null;
+    }
 
     [ContextMenu("Save")]
     public void Save()
@@ -70,21 +86,34 @@ public class InventorySO : ScriptableObject
 [System.Serializable]
 public class Inventory 
 {
-    public List<InventorySlot> itemSlots = new List<InventorySlot>();
+    public static int inventorySlotNum = 24;
+    public InventorySlot[] itemSlots = new InventorySlot[inventorySlotNum];
 }
 [System.Serializable]
 public class InventorySlot
 {
-    public int ID;
+    public int ID = -1;//so the inventory won't load item having ID = 0 
     public InventoryItem inventoryItem;
     public int amount;
+
+    public InventorySlot()
+    {
+        this.ID = -1;
+        this.inventoryItem = null;
+        this.amount = 0;
+    }
     public InventorySlot(int ID, InventoryItem item, int amount)
     {
         this.ID = ID;
         this.inventoryItem = item;
         this.amount = amount;
     }
-
+    public void UpdateSlot(int ID, InventoryItem item, int amount)
+    {
+        this.ID = ID;
+        this.inventoryItem = item;
+        this.amount = amount;
+    }
     public void AddAmount(int amount)
     {
         this.amount += amount;

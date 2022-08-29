@@ -2934,7 +2934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f1a92eeb9463f4fb14096a53d9e38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryPrefab: {fileID: 2395290347021137965, guid: fdab0b89de3c8054ea7e49d3b8d21806, type: 3}
+  slotPrefab: {fileID: 2395290347021137965, guid: fdab0b89de3c8054ea7e49d3b8d21806, type: 3}
   inventory: {fileID: 11400000, guid: 6345015836e77f048b2b1c47748ac396, type: 2}
   xStart: -225
   yStart: -185

@@ -15,4 +15,172 @@ MonoBehaviour:
   savePath: /Inventory.save
   itemDatabase: {fileID: 11400000, guid: 49b47ad216edaf14295fea2846028b5a, type: 2}
   slotsContainer:
-    itemSlots: []
+    itemSlots:
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      inventoryItem:
+        name: 
+        ID: 0
+        buffs: []
+        isStackable: 0
+      amount: 0
