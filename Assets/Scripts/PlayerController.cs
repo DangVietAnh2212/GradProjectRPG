@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
                 Interactible interactible = hit.collider.GetComponent<Interactible>();
                 if(interactible != null)
                 {
+                    print("Set Focus");
                     SetFocus(interactible);
                 }
                 else if (Physics.Raycast(ray, out hit, 100, movementMask))

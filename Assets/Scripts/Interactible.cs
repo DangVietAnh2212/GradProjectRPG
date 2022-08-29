@@ -4,9 +4,9 @@ using UnityEngine;
 public class Interactible : MonoBehaviour
 {
     public float radius = 1.5f;
-    bool isFocus = false;
-    bool hasInteracted = false;
-    Transform player;
+    protected bool isFocus = false;
+    protected bool hasInteracted = false;
+    protected Transform player;
     public Transform interactionPoint;
 
     private void OnDrawGizmosSelected()
