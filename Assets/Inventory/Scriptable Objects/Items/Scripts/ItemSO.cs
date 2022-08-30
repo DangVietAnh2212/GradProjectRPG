@@ -21,6 +21,9 @@ public enum Attribute
     Attack,
     Defence
 }
+/// <summary>
+/// Base class for all items in the game
+/// </summary>
 public abstract class ItemSO : ScriptableObject
 {
     public int ID;
@@ -30,14 +33,15 @@ public abstract class ItemSO : ScriptableObject
     public string description;
     public ItemBuff[] buffs;
     public bool isStackable = false;
-
     public InventoryItem CreateItem()
     {
         InventoryItem newInventoryItem = new InventoryItem(this);
         return newInventoryItem;
     }
 }
-
+/// <summary>
+/// Class to manager items in the inventory
+/// </summary>
 [System.Serializable]
 public class InventoryItem
 {
@@ -45,6 +49,7 @@ public class InventoryItem
     public int ID;
     public ItemBuff[] buffs;
     public bool isStackable;
+
     public InventoryItem(ItemSO itemSO)
     {
         name = itemSO.name;
@@ -58,6 +63,10 @@ public class InventoryItem
         }
     }
 }
+
+/// <summary>
+/// Class for buffs in item
+/// </summary>
 [System.Serializable]
 public class ItemBuff
 {

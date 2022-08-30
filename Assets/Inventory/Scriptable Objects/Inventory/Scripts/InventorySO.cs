@@ -1,15 +1,10 @@
-using JetBrains.Annotations;
-using Newtonsoft.Json.Bson;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using Unity.VisualScripting.FullSerializer;
-using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Progress;
-
+/// <summary>
+/// Base class to manage inventory
+/// </summary>
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory System/Inventory")]
 public class InventorySO : ScriptableObject
 {
@@ -17,25 +12,30 @@ public class InventorySO : ScriptableObject
     public ItemDatabaseSO itemDatabase;
     public Inventory slotsContainer;
 
-
     public void AddItem(InventoryItem inventoryItem, int amount)
     {
         for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
         {
-            if (slotsContainer.itemSlots[i].ID == inventoryItem.ID && inventoryItem.isStackable)
+            if (slotsContainer.itemSlots[i].slotID == inventoryItem.ID && inventoryItem.isStackable)
             {
                 slotsContainer.itemSlots[i].AddAmount(amount);
                 return;
             }
         }
-        SetFirstEmptySlot(inventoryItem, amount);
+        PutItemToEmptySlot(inventoryItem, amount);
     }
-
-    public InventorySlot SetFirstEmptySlot(InventoryItem inventoryItem, int amount)
+    /// <summary>
+    /// Add the new item to a empty inventory slot, return the slot in the inventory of that item if find one,
+    /// return null if can't find an empty slot.
+    /// </summary>
+    /// <param name="inventoryItem"></param>
+    /// <param name="amount"></param>
+    /// <returns></returns>
+    public InventorySlot PutItemToEmptySlot(InventoryItem inventoryItem, int amount)
     {
         for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
         {
-            if (slotsContainer.itemSlots[i].ID == -1)
+            if (slotsContainer.itemSlots[i].slotID == -1)
             {
                 slotsContainer.itemSlots[i].UpdateSlot(inventoryItem.ID, inventoryItem, amount);
                 return slotsContainer.itemSlots[i];
@@ -43,6 +43,22 @@ public class InventorySO : ScriptableObject
         }
         //Do something if inventory is full
         return null;
+    }
+
+    public void SwapItemInSlot(InventorySlot slot1, InventorySlot slot2)
+    {
+        InventorySlot temp = new InventorySlot(slot2.slotID, slot2.inventoryItem, slot2.amount);
+        slot2.UpdateSlot(slot1.slotID, slot1.inventoryItem, slot1.amount);
+        slot1.UpdateSlot(temp.slotID, temp.inventoryItem, temp.amount);
+    }
+
+    public void RemoveItem(InventoryItem inventoryItem)
+    {
+        for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
+        {
+            if (slotsContainer.itemSlots[i].inventoryItem == inventoryItem)
+                slotsContainer.itemSlots[i].UpdateSlot(-1, null, 0);
+        }
     }
 
     [ContextMenu("Save")]
@@ -58,6 +74,7 @@ public class InventorySO : ScriptableObject
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, slotsContainer);
         stream.Close();
+        Debug.Log("Saved");
     }
 
     [ContextMenu("Load")]
@@ -71,8 +88,18 @@ public class InventorySO : ScriptableObject
             file.Close();   */
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Open, FileAccess.Read);
-            slotsContainer = (Inventory)formatter.Deserialize(stream);
+            Inventory newSlotsContainer = (Inventory)formatter.Deserialize(stream);
+            for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
+            {
+                slotsContainer.itemSlots[i].UpdateSlot(
+                    newSlotsContainer.itemSlots[i].slotID,
+                    newSlotsContainer.itemSlots[i].inventoryItem,
+                    newSlotsContainer.itemSlots[i].amount
+                    );
+            }
             stream.Close();
+            Debug.Log("Loaded");
+            Debug.Log("Inside Inventory: " + slotsContainer.itemSlots[0].inventoryItem.name);
         }
     }
 
@@ -83,34 +110,48 @@ public class InventorySO : ScriptableObject
     }
 }
 
+/// <summary>
+/// Class that holds the item slots
+/// </summary>
 [System.Serializable]
 public class Inventory 
 {
     public static int inventorySlotNum = 24;
     public InventorySlot[] itemSlots = new InventorySlot[inventorySlotNum];
 }
+
+/// <summary>
+/// Class manage each slot in the inventory and how they change
+/// </summary>
 [System.Serializable]
 public class InventorySlot
 {
-    public int ID = -1;//so the inventory won't load item having ID = 0 
+    public int slotID = -1;//so the inventory won't load item having ID = 0 
     public InventoryItem inventoryItem;
     public int amount;
 
     public InventorySlot()
     {
-        this.ID = -1;
+        this.slotID = -1;
         this.inventoryItem = null;
         this.amount = 0;
     }
     public InventorySlot(int ID, InventoryItem item, int amount)
     {
-        this.ID = ID;
+        this.slotID = ID;
         this.inventoryItem = item;
         this.amount = amount;
     }
+
+    /// <summary>
+    /// this method update the item slot, replace the slot's ID with ID of item in the inventory
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <param name="item"></param>
+    /// <param name="amount"></param>
     public void UpdateSlot(int ID, InventoryItem item, int amount)
     {
-        this.ID = ID;
+        this.slotID = ID;
         this.inventoryItem = item;
         this.amount = amount;
     }

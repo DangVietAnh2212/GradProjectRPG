@@ -1818,11 +1818,11 @@ LightingSettings:
   m_AlbedoBoost: 1
   m_IndirectOutputScale: 1
   m_UsingShadowmask: 1
-  m_BakeBackend: 1
+  m_BakeBackend: 2
   m_LightmapMaxSize: 1024
   m_BakeResolution: 40
   m_Padding: 2
-  m_LightmapCompression: 3
+  m_LightmapCompression: 2
   m_AO: 0
   m_AOMaxDistance: 1
   m_CompAOExponent: 1
@@ -2934,6 +2934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f1a92eeb9463f4fb14096a53d9e38e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sizeOfSlot: 90
   slotPrefab: {fileID: 2395290347021137965, guid: fdab0b89de3c8054ea7e49d3b8d21806, type: 3}
   inventory: {fileID: 11400000, guid: 6345015836e77f048b2b1c47748ac396, type: 2}
   xStart: -225

@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DisplayInventory : MonoBehaviour
+public class UserInterface : MonoBehaviour
 {
     public MouseItem mouseItem = new MouseItem();
 
@@ -40,9 +40,9 @@ public class DisplayInventory : MonoBehaviour
 
     public void UpdateSlotsDisplay()
     {
-        foreach(KeyValuePair<GameObject, InventorySlot> slot in displayDictionary)
+        foreach (KeyValuePair<GameObject, InventorySlot> slot in displayDictionary)
         {
-            if(slot.Value.slotID >= 0)
+            if (slot.Value.slotID >= 0)
             {
                 slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().sprite = inventory.itemDatabase.GetItem[slot.Value.inventoryItem.ID].uiDisplay;
                 slot.Key.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
@@ -118,7 +118,7 @@ public class DisplayInventory : MonoBehaviour
 
     public void OnDragEnd(GameObject obj)
     {
-        if(mouseItem.hoverObj != null)
+        if (mouseItem.hoverObj != null)
         {
             inventory.SwapItemInSlot(displayDictionary[obj], displayDictionary[mouseItem.hoverObj]);
         }
@@ -133,7 +133,7 @@ public class DisplayInventory : MonoBehaviour
 
     public void OnDrag(GameObject obj)
     {
-        if(mouseItem.obj != null)
+        if (mouseItem.obj != null)
         {
             mouseItem.obj.GetComponent<RectTransform>().position = Input.mousePosition;
         }
@@ -148,3 +148,12 @@ public class DisplayInventory : MonoBehaviour
             );
     }
 }
+
+public class MouseItem
+{
+    public GameObject obj;
+    public GameObject hoverObj;
+    public InventorySlot item;
+    public InventorySlot hoverSlot;
+}
+

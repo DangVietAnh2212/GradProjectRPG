@@ -10,13 +10,11 @@ public class PlayerInventoryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Saving");
             inventory.Save();
         }
 
         if (Input.GetKeyDown(KeyCode.Return)) 
         {
-            Debug.Log("Loading");
             inventory.Load();
         }
 

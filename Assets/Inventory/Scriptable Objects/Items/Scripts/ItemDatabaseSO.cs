@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// Class for all item exist in the game. It will give each item their own ID
+/// </summary>
 [CreateAssetMenu(fileName = "New Item Database", menuName = "Inventory System/Item/Database")]
 public class ItemDatabaseSO : ScriptableObject, ISerializationCallbackReceiver
 {
