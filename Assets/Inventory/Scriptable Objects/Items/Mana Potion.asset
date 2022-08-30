@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd3936ccc80a0a546a889fd8a437d7a1, type: 3}
-  m_Name: Mittens
+  m_Name: Mana Potion
   m_EditorClassIdentifier: 
-  uiDisplay: {fileID: 21300000, guid: f6a09db07ad8a3a4ca5d2f6e9eed1173, type: 3}
-  itemType: 4
+  uiDisplay: {fileID: 21300000, guid: feb002807d2bf7c46a1962bd107abc6b, type: 3}
+  itemType: 1
   description: 
   inventoryItemData:
     name: 
     ID: -1
     buffs: []
     isStackable: 0
-  isStackable: 0
+  isStackable: 1

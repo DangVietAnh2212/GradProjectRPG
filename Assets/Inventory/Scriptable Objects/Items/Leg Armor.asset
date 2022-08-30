@@ -9,13 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef783a412da45ef4da1e21ee34a2e7c6, type: 3}
-  m_Name: SmallManaPotion
+  m_Script: {fileID: 11500000, guid: bd3936ccc80a0a546a889fd8a437d7a1, type: 3}
+  m_Name: Leg Armor
   m_EditorClassIdentifier: 
-  ID: 5
-  uiDisplay: {fileID: 21300000, guid: feb002807d2bf7c46a1962bd107abc6b, type: 3}
-  itemType: 1
+  uiDisplay: {fileID: 21300000, guid: 6adad879619b6b641878f6adfd794ee0, type: 3}
+  itemType: 5
   description: 
-  buffs: []
-  isStackable: 1
-  manaRecover: 30
+  inventoryItemData:
+    name: 
+    ID: -1
+    buffs: []
+    isStackable: 0
+  isStackable: 0

@@ -6,7 +6,11 @@ public enum ItemType
 {
     LifeRecover,
     ManaRecover, 
-    Equipment,
+    Helmet,
+    BodyArmour,
+    Glove,
+    Boots,
+    SpellBook,
     Spell,
     Default
 }
@@ -24,14 +28,14 @@ public enum Attribute
 /// <summary>
 /// Base class for all items in the game
 /// </summary>
-public abstract class ItemSO : ScriptableObject
+[CreateAssetMenu(fileName = "New Item", menuName = "Inventory System/Items/Item")]
+public class ItemSO : ScriptableObject
 {
-    public int ID;
     public Sprite uiDisplay;
     public ItemType itemType;
     [TextArea(15, 20)]
     public string description;
-    public ItemBuff[] buffs;
+    public InventoryItem inventoryItemData = new InventoryItem();
     public bool isStackable = false;
     public InventoryItem CreateItem()
     {
@@ -46,20 +50,25 @@ public abstract class ItemSO : ScriptableObject
 public class InventoryItem
 {
     public string name;
-    public int ID;
+    public int ID = -1;
     public ItemBuff[] buffs;
     public bool isStackable;
 
+    public InventoryItem()
+    {
+        name = "";
+        ID = -1;
+    }
     public InventoryItem(ItemSO itemSO)
     {
         name = itemSO.name;
-        ID = itemSO.ID;
-        buffs = new ItemBuff[itemSO.buffs.Length];
+        ID = itemSO.inventoryItemData.ID;
+        buffs = new ItemBuff[itemSO.inventoryItemData.buffs.Length];
         isStackable = itemSO.isStackable;
         for(int i = 0; i < buffs.Length; i++)
         {
-            buffs[i] = new ItemBuff(itemSO.buffs[i].min, itemSO.buffs[i].max);
-            buffs[i].attribute = itemSO.buffs[i].attribute;
+            buffs[i] = new ItemBuff(itemSO.inventoryItemData.buffs[i].min, itemSO.inventoryItemData.buffs[i].max);
+            buffs[i].attribute = itemSO.inventoryItemData.buffs[i].attribute;
         }
     }
 }

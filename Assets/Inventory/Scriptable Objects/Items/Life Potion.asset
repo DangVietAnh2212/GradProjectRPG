@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7291344dcbc2e19449790889dac73c84, type: 3}
-  m_Name: Bones
+  m_Script: {fileID: 11500000, guid: bd3936ccc80a0a546a889fd8a437d7a1, type: 3}
+  m_Name: Life Potion
   m_EditorClassIdentifier: 
-  ID: 0
-  uiDisplay: {fileID: 21300000, guid: 277d33418060b0b4e9f45a582b4ac09c, type: 3}
-  itemType: 4
+  uiDisplay: {fileID: 21300000, guid: eb00721bea83d62459345d15a3eec730, type: 3}
+  itemType: 0
   description: 
-  buffs: []
+  inventoryItemData:
+    name: 
+    ID: -1
+    buffs: []
+    isStackable: 0
   isStackable: 1

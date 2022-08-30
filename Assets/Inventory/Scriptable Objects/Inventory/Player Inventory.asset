@@ -16,171 +16,213 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: 49b47ad216edaf14295fea2846028b5a, type: 2}
   slotsContainer:
     itemSlots:
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0
-    - ID: -1
+    - allowedItems: 
       inventoryItem:
         name: 
-        ID: 0
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
         buffs: []
         isStackable: 0
       amount: 0

@@ -9,8 +9,13 @@ public class GroundItem : Interactible, ISerializationCallbackReceiver
     public override void Interact()
     {
         print("Pick up " + this);
-        player.GetComponent<PlayerInventoryManager>().inventory.AddItem(new InventoryItem(item), 1);
-        Destroy(this.gameObject);
+        var playerInventory = player.GetComponent<PlayerInventoryManager>().inventory;
+        if(playerInventory.AddItem(new InventoryItem(item), 1))
+        {
+            Destroy(this.gameObject);
+        }
+                                                 
+       
     }
 
     public void OnAfterDeserialize()
@@ -20,7 +25,9 @@ public class GroundItem : Interactible, ISerializationCallbackReceiver
 
     public void OnBeforeSerialize()
     {
+#if UNITY_EDITOR
         GetComponentInChildren<SpriteRenderer>().sprite = item.uiDisplay;
         EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+#endif
     }
 }

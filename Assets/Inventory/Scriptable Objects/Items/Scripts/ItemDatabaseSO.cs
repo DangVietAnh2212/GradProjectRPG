@@ -9,19 +9,24 @@ using UnityEngine;
 public class ItemDatabaseSO : ScriptableObject, ISerializationCallbackReceiver
 {
     public ItemSO[] items;
-    public Dictionary<int, ItemSO> GetItem = new Dictionary<int, ItemSO>();
+    //public Dictionary<int, ItemSO> GetItem = new Dictionary<int, ItemSO>();
+    [ContextMenu("Update ID's")]
+    public void UpdateID()
+    {
+        for (int i = 0; i < items.Length; i++)
+        {
+            if(items[i].inventoryItemData.ID != i)
+                items[i].inventoryItemData.ID = i;
+        }
+    }
     public void OnAfterDeserialize()
     {
-        for(int i = 0; i < items.Length; i++)
-        {
-            items[i].ID = i;
-            GetItem.Add(i, items[i]);
-        }
+        UpdateID();
     }
 
     public void OnBeforeSerialize()
     {
-        GetItem = new Dictionary<int, ItemSO>();
+        //GetItem = new Dictionary<int, ItemSO>();
     }
 
     //Need ISerializationCallbackReceiver because this is a Scriptable Obj i create in the Editor so 
