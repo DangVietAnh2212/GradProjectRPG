@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public enum ItemType
 {
     LifeRecover,
@@ -77,7 +79,7 @@ public class InventoryItem
 /// Class for buffs in item
 /// </summary>
 [System.Serializable]
-public class ItemBuff
+public class ItemBuff : IModifier
 {
     public Attribute attribute;
     public int value;
@@ -88,6 +90,11 @@ public class ItemBuff
         this.min = min;
         this.max = max;
         GenerateValue();
+    }
+
+    public void AddValue(ref int baseValue)
+    {
+        baseValue += value;
     }
 
     public void GenerateValue()

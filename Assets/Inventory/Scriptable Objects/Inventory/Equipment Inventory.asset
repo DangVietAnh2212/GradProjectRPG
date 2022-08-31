@@ -51,3 +51,4 @@ MonoBehaviour:
         buffs: []
         isStackable: 0
       amount: 0
+  interfaceType: 1

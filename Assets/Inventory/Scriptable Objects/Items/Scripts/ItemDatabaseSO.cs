@@ -8,15 +8,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Item Database", menuName = "Inventory System/Item/Database")]
 public class ItemDatabaseSO : ScriptableObject, ISerializationCallbackReceiver
 {
-    public ItemSO[] items;
+    public ItemSO[] itemSOs;
     //public Dictionary<int, ItemSO> GetItem = new Dictionary<int, ItemSO>();
     [ContextMenu("Update ID's")]
     public void UpdateID()
     {
-        for (int i = 0; i < items.Length; i++)
+        for (int i = 0; i < itemSOs.Length; i++)
         {
-            if(items[i].inventoryItemData.ID != i)
-                items[i].inventoryItemData.ID = i;
+            if(itemSOs[i].inventoryItemData.ID != i)
+                itemSOs[i].inventoryItemData.ID = i;
         }
     }
     public void OnAfterDeserialize()

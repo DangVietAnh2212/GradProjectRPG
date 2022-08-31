@@ -17,7 +17,11 @@ MonoBehaviour:
   description: 
   inventoryItemData:
     name: 
-    ID: -1
-    buffs: []
+    ID: 8
+    buffs:
+    - attribute: 5
+      value: 0
+      min: 100
+      max: 150
     isStackable: 0
   isStackable: 0

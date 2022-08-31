@@ -19,20 +19,37 @@ public abstract class UserInterface : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < inventory.slotsContainer.itemSlots.Length; i++)
+        for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
-            inventory.slotsContainer.itemSlots[i].parent = this;
+            inventory.GetSlots[i].parent = this;
+            inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
         }
         CreateInventorySlots();
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });
     }
 
+    private void OnSlotUpdate(InventorySlot slot)
+    {
+        if (slot.inventoryItem.ID >= 0)
+        {
+            slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = slot.ItemSO.uiDisplay;
+            slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
+            slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = slot.amount == 1 ? "" : slot.amount.ToString("n0");
+        }
+        else
+        {
+            slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
+            slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
+            slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        }
+    }
+
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         slotsOnInterface.UpdateSlotDisplay();
-    }
+    }*/
     public abstract void CreateInventorySlots();
 
     protected void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
