@@ -1,9 +1,11 @@
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
 {
+    public GameObject groundItemPrefab;
     Camera cam;
     public LayerMask movementMask;
     PlayerMotor motor;
@@ -28,6 +30,24 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out hit, 100) && 
                 !animator.GetCurrentAnimatorStateInfo(0).IsName("BaseAnimation.BasicSpellAttack"))
             {
+                if (EventSystem.current.IsPointerOverGameObject()) 
+                {
+                    return;//If mouse click outside of UI, do nothing
+                }
+                else if (MouseData.itemOnMouseDisplay != null)
+                {
+                    MouseData.itemOnMouse = false;
+                    Destroy(MouseData.itemOnMouseDisplay);
+                    Vector3 dropLocation = transform.position + Vector3.up * 3 + 
+                        new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f,2f));
+                    GameObject obj = Instantiate(groundItemPrefab, transform.position + Vector3.up * 3, Quaternion.identity);
+                    obj.GetComponent<GroundItem>().item = MouseData.tempSlot.ItemSO;
+                    obj.GetComponent<BillBoard>().cam = Camera.main;
+                    obj.GetComponent<Rigidbody>().isKinematic = false;
+                    MouseData.tempSlot.RemoveItem();
+                    //If mouse click outside of UI but you have smt on the mouse, drop it on ground
+                }
+
                 Interactible interactible = hit.collider.GetComponent<Interactible>();
                 if(interactible != null)
                 {

@@ -1,0 +1,271 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196bc8deb1938e744b6b45b31b775761, type: 3}
+  m_Name: Player Inventory
+  m_EditorClassIdentifier: 
+  savePath: /Inventory.save
+  itemDatabase: {fileID: 11400000, guid: 49b47ad216edaf14295fea2846028b5a, type: 2}
+  slotsContainer:
+    itemSlots:
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+  interfaceType: 0
