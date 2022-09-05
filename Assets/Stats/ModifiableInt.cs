@@ -16,22 +16,22 @@ public class ModifiableInt
 
     public List<IModifier> modifiers = new List<IModifier>();
 
-    public event ModifyEvent ValueModified;
+    public event ModifyEvent ValueModifiedEvent;
 
     public ModifiableInt(ModifyEvent method = null)
     {
         modifiedValue = BaseValue;
         if(method != null)
-            ValueModified += method;
+            ValueModifiedEvent += method;
     }
 
     public void RegisterModEvent(ModifyEvent method)
     {
-        ValueModified += method;
+        ValueModifiedEvent += method;
     }
     public void UnregisterModEvent(ModifyEvent method)
     {
-        ValueModified -= method;
+        ValueModifiedEvent -= method;
     }
 
     public void UpdateModifiedValue()
@@ -42,8 +42,8 @@ public class ModifiableInt
             modifiers[i].AddValue(ref valueToAdd);
         }
         ModifiedValue = baseValue + valueToAdd;
-        if (ValueModified != null)
-            ValueModified.Invoke();
+        if (ValueModifiedEvent != null)
+            ValueModifiedEvent.Invoke();
     }
 
     public void AddModifier(IModifier modifier)

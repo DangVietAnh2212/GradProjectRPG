@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [System.Serializable]
-public class Attributes 
+public class AttributeManager
 {
     [System.NonSerialized]
     public PlayerInventoryManager parent;
-    public Attribute attributeType;
+    public AttributeType attributeType;
     public ModifiableInt value;
 
     public void SetParent(PlayerInventoryManager player)

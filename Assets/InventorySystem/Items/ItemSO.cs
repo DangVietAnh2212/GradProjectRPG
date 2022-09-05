@@ -17,16 +17,7 @@ public enum ItemType
     Default
 }
 
-public enum Attribute
-{
-    Strength,
-    Dexterity,
-    Intelligence,
-    Life,
-    Mana,
-    Attack,
-    Defence
-}
+
 /// <summary>
 /// Base class for all items in the game
 /// </summary>
@@ -71,35 +62,8 @@ public class InventoryItem
         for(int i = 0; i < buffs.Length; i++)
         {
             buffs[i] = new ItemBuff(itemSO.inventoryItemData.buffs[i].min, itemSO.inventoryItemData.buffs[i].max);
-            buffs[i].attribute = itemSO.inventoryItemData.buffs[i].attribute;
+            buffs[i].attributeType = itemSO.inventoryItemData.buffs[i].attributeType;
         }
     }
 }
 
-/// <summary>
-/// Class for buffs in item
-/// </summary>
-[System.Serializable]
-public class ItemBuff : IModifier
-{
-    public Attribute attribute;
-    public int value;
-    public int min;
-    public int max;
-    public ItemBuff(int min, int max)
-    {
-        this.min = min;
-        this.max = max;
-        GenerateValue();
-    }
-
-    public void AddValue(ref int baseValue)
-    {
-        baseValue += value;
-    }
-
-    public void GenerateValue()
-    {
-        value = Random.Range(min, max);
-    }
-}

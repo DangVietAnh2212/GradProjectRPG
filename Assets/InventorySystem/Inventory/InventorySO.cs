@@ -135,15 +135,48 @@ public class InventorySO : ScriptableObject
                     );
             }
             stream.Close();
-            Debug.Log("Loaded");
-            Debug.Log("Inside Inventory: " + GetSlots[0].inventoryItem.name);
+            /*Debug.Log("Loaded");
+            Debug.Log("Inside Inventory: " + GetSlots[0].inventoryItem.name);*/
         }
     }
 
     [ContextMenu("Clear")]
     public void Clear()
     {
-        slotsContainer.Clear();
+        if(interfaceType == InterfaceType.Inventory)
+            slotsContainer.Clear();
+        if(interfaceType == InterfaceType.Equipment)
+        {
+            ItemType[] allowedSlots = new ItemType[5];
+            for (int i = 0; i < allowedSlots.Length; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        allowedSlots[i] = ItemType.Helmet;
+                        break;
+                    case 1:
+                        allowedSlots[i] = ItemType.BodyArmour;
+                        break;
+                    case 2:
+                        allowedSlots[i] = ItemType.Glove;
+                        break;
+                    case 3:
+                        allowedSlots[i] = ItemType.SpellBook;
+                        break;
+                    case 4:
+                        allowedSlots[i] = ItemType.Boots;
+                        break;
+                }
+            }
+            int allowedSlotCount = 0;
+            for (int i = 0; i < slotsContainer.itemSlots.Length; i++)
+            {
+                GetSlots[i].allowedItems = new ItemType[1];
+                GetSlots[i].allowedItems[0] = allowedSlots[allowedSlotCount++];
+            }
+            slotsContainer.Clear();
+        }
     }
 }
 
@@ -212,10 +245,17 @@ public class InventorySlot
     /// <param name="amount"></param>
     public void UpdateSlot(InventoryItem item, int amount)
     {
-        if(OnBeforeUpdate != null) OnBeforeUpdate.Invoke(this);
+        if (OnBeforeUpdate != null) 
+        {
+            OnBeforeUpdate.Invoke(this);
+        }
+
         this.inventoryItem = item;
         this.amount = amount;
-        if (OnAfterUpdate != null) OnAfterUpdate.Invoke(this);
+        if (OnAfterUpdate != null) 
+        {
+            OnAfterUpdate.Invoke(this);
+        } 
     }
 
     public void RemoveItem()

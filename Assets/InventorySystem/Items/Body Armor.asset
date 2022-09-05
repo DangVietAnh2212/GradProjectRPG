@@ -20,11 +20,11 @@ MonoBehaviour:
     name: 
     ID: 0
     buffs:
-    - attribute: 0
+    - attributeType: 0
       value: 0
       min: 10
       max: 20
-    - attribute: 1
+    - attributeType: 3
       value: 0
       min: 30
       max: 50

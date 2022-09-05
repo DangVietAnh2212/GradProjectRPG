@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class PlayerInventoryManager : MonoBehaviour
 {
+    MainStats playerMainStats;
+    bool hasInventoryInitiated = false;
     //public MouseItem mouseItem = new MouseItem();
-
+    public GameObject inventoryPanel;
     public InventorySO inventory;
     public InventorySO equipmentInventory;
-    public Attributes[] attributes;
+    public AttributeManager[] attributeTypes;
 
     private Transform equippedHelmet;
     private Transform equippedBodyArmor;
@@ -18,12 +20,14 @@ public class PlayerInventoryManager : MonoBehaviour
 
 
     private BoneCombiner boneCombiner;
+
     private void Start()
     {
+        playerMainStats = GetComponent<MainStats>();
         boneCombiner = new BoneCombiner(gameObject);
-        for (int i = 0; i < attributes.Length; i++)
+        for (int i = 0; i < attributeTypes.Length; i++)
         {
-            attributes[i].SetParent(this);
+            attributeTypes[i].SetParent(this);
         }
 
         for (int i = 0; i < equipmentInventory.GetSlots.Length; i++)
@@ -46,13 +50,13 @@ public class PlayerInventoryManager : MonoBehaviour
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
-                Debug.Log(string.Concat("Remove ", inventorySlot.ItemSO, "  on", inventorySlot.parent.inventory.interfaceType, ", Allowed Items: ", string.Join(", ", inventorySlot.allowedItems)));
+                //Debug.Log(string.Concat("Remove ", inventorySlot.ItemSO, "  on", inventorySlot.parent.inventory.interfaceType, ", Allowed Items: ", string.Join(", ", inventorySlot.allowedItems)));
                 for (int i = 0; i < inventorySlot.inventoryItem.buffs.Length; i++)
                 {
-                    for (int j = 0; j < attributes.Length; j++)
+                    for (int j = 0; j < attributeTypes.Length; j++)
                     {
-                        if (attributes[j].attributeType == inventorySlot.inventoryItem.buffs[i].attribute)
-                            attributes[j].value.RemoveModifier(inventorySlot.inventoryItem.buffs[i]);
+                        if (attributeTypes[j].attributeType == inventorySlot.inventoryItem.buffs[i].attributeType)
+                            attributeTypes[j].value.RemoveModifier(inventorySlot.inventoryItem.buffs[i]);
                     }
                 }
 
@@ -99,14 +103,14 @@ public class PlayerInventoryManager : MonoBehaviour
             case InterfaceType.Inventory:
                 break;
             case InterfaceType.Equipment:
-                Debug.Log(string.Concat("Placed ", inventorySlot.ItemSO, "on ", inventorySlot.parent.inventory.interfaceType, ", Allowed Items: ", string.Join(", ", inventorySlot.allowedItems)));
+                //Debug.Log(string.Concat("Placed ", inventorySlot.ItemSO, "on ", inventorySlot.parent.inventory.interfaceType, ", Allowed Items: ", string.Join(", ", inventorySlot.allowedItems)));
 
                 for (int i = 0; i < inventorySlot.inventoryItem.buffs.Length; i++)
                 {
-                    for (int j = 0; j < attributes.Length; j++)
+                    for (int j = 0; j < attributeTypes.Length; j++)
                     {
-                        if (attributes[j].attributeType == inventorySlot.inventoryItem.buffs[i].attribute)
-                            attributes[j].value.AddModifier(inventorySlot.inventoryItem.buffs[i]);
+                        if (attributeTypes[j].attributeType == inventorySlot.inventoryItem.buffs[i].attributeType)
+                            attributeTypes[j].value.AddModifier(inventorySlot.inventoryItem.buffs[i]);
                     }
                 }
 
@@ -154,9 +158,47 @@ public class PlayerInventoryManager : MonoBehaviour
         }
     }
 
-    public void AttributeModifierNotice(Attributes attribute)
+    private void LateUpdate()
+    {
+        if (!hasInventoryInitiated)
+        {
+            inventory.Load();
+            equipmentInventory.Load();
+            inventoryPanel.SetActive(false);
+            hasInventoryInitiated = true;
+        }
+    }
+
+    public void AttributeModifierNotice(AttributeManager attribute)
     {
         Debug.Log(string.Concat(attribute.attributeType, " was updated! The value is now:  ", attribute.value.ModifiedValue));
+        /*switch (attribute.attributeType)
+        {
+            case AttributeType.Strength:
+                playerMainStats.strength += attribute.value.ModifiedValue;
+                playerMainStats.ResetStats();
+                break;
+            case AttributeType.Dexterity:
+                playerMainStats.dexterity += attribute.value.ModifiedValue;
+                playerMainStats.ResetStats();
+                break;
+            case AttributeType.Intelligence:
+                playerMainStats.intelligence += attribute.value.ModifiedValue;
+                playerMainStats.ResetStats();
+                break;
+            case AttributeType.Life:
+                playerMainStats.maxHealth += attribute.value.ModifiedValue;
+                playerMainStats.ResetStats();
+                break;
+            case AttributeType.Mana:
+                playerMainStats.maxMana += attribute.value.ModifiedValue;
+                playerMainStats.ResetStats();
+                break;
+            case AttributeType.Attack:
+                break;
+            case AttributeType.Defence:
+                break;
+        }*/
     }
 
     private void OnApplicationQuit()

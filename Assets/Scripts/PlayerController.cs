@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
@@ -36,11 +37,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (MouseData.itemOnMouseDisplay != null)
                 {
+                    MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color = MouseData.colorOfItemOnMouse;
                     MouseData.itemOnMouse = false;
-                    Destroy(MouseData.itemOnMouseDisplay);
+                    Destroy(MouseData.itemOnMouseDisplay);//Destroy the item on mouse and 
+                    //give back the color of the inventory slot
                     Vector3 dropLocation = transform.position + Vector3.up * 3 + 
                         new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f,2f));
-                    GameObject obj = Instantiate(groundItemPrefab, transform.position + Vector3.up * 3, Quaternion.identity);
+                    GameObject obj = Instantiate(groundItemPrefab, dropLocation, Quaternion.identity);
                     obj.GetComponent<GroundItem>().item = MouseData.tempSlot.ItemSO;
                     obj.GetComponent<BillBoard>().cam = Camera.main;
                     obj.GetComponent<Rigidbody>().isKinematic = false;

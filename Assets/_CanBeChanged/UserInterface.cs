@@ -17,7 +17,7 @@ public abstract class UserInterface : MonoBehaviour
 
     protected Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         for (int i = 0; i < inventory.GetSlots.Length; i++)
         {
@@ -29,7 +29,7 @@ public abstract class UserInterface : MonoBehaviour
         AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });*/
     }
 
-    private void OnSlotUpdate(InventorySlot slot)
+    public void OnSlotUpdate(InventorySlot slot)
     {
         if (slot.inventoryItem.ID >= 0)
         {
@@ -127,6 +127,9 @@ public abstract class UserInterface : MonoBehaviour
             MouseData.itemOnMouseDisplay = CreateTempItem(obj);
             if (MouseData.itemOnMouseDisplay != null)
             {
+                MouseData.itemOnMouseRef = obj;
+                MouseData.colorOfItemOnMouse = MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color;
+                MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0.5f);
                 MouseData.itemOnMouse = true;
                 MouseData.tempSlot = slotsOnInterface[obj];
                 return;
@@ -134,6 +137,7 @@ public abstract class UserInterface : MonoBehaviour
         }
         else if (MouseData.itemOnMouseDisplay != null)
         {
+            MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color = MouseData.colorOfItemOnMouse;
             MouseData.itemOnMouse = false;
             Destroy(MouseData.itemOnMouseDisplay);
             if (MouseData.tempSlot != null)
@@ -161,6 +165,8 @@ public static class MouseData
     //public static GameObject itemSavedOnMouse;
 
     public static GameObject itemOnMouseDisplay;
+    public static Color colorOfItemOnMouse;
+    public static GameObject itemOnMouseRef;
     public static InventorySlot tempSlot;
     public static bool itemOnMouse = false;
 }
