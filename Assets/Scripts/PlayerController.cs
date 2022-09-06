@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -48,6 +49,8 @@ public class PlayerController : MonoBehaviour
                         new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
                         GameObject obj = Instantiate(groundItemPrefab, dropLocation, Quaternion.identity);
                         obj.GetComponent<GroundItem>().item = MouseData.tempSlot.ItemSO;
+                        obj.GetComponent<GroundItem>().isNew = false;
+                        obj.GetComponent<GroundItem>().inventoryItem = MouseData.tempSlot.inventoryItem;
                         obj.GetComponent<BillBoard>().cam = Camera.main;
                         obj.GetComponent<Rigidbody>().isKinematic = false;
                     }

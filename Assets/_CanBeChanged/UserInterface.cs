@@ -157,9 +157,12 @@ public abstract class UserInterface : MonoBehaviour
 
     public void ClearItemOnMouse()
     {
-        MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color = MouseData.colorOfItemOnMouse;
-        MouseData.itemOnMouse = false;
-        Destroy(MouseData.itemOnMouseDisplay);
+        if(MouseData.itemOnMouse == true)
+        {
+            MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color = MouseData.colorOfItemOnMouse;
+            MouseData.itemOnMouse = false;
+            Destroy(MouseData.itemOnMouseDisplay);
+        }
     }
 }
 

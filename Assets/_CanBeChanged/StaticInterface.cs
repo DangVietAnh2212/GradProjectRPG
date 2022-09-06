@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 public class StaticInterface : UserInterface
 {
     public GameObject[] slots;
-    
-
     public override void CreateInventorySlots()
     {
         slotsOnInterface = new Dictionary<GameObject, InventorySlot>();

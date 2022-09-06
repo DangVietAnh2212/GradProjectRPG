@@ -28,5 +28,9 @@ MonoBehaviour:
       value: 0
       min: 30
       max: 100
+    - attributeType: 5
+      value: 0
+      min: 20
+      max: 30
     isStackable: 0
   isStackable: 0

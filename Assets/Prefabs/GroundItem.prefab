@@ -136,6 +136,12 @@ MonoBehaviour:
   radius: 1.5
   interactionPoint: {fileID: 2099179158944484805}
   item: {fileID: 11400000, guid: 565a4ea6ecf1d964aae0794569ce4fc9, type: 2}
+  isNew: 1
+  inventoryItem:
+    name: 
+    ID: -1
+    buffs: []
+    isStackable: 0
 --- !u!114 &2099179160034430519
 MonoBehaviour:
   m_ObjectHideFlags: 0

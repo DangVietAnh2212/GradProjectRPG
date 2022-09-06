@@ -7,14 +7,27 @@ public class GroundItem : Interactible, ISerializationCallbackReceiver
 {
 
     public ItemSO item;
+    public bool isNew = true;
+    public InventoryItem inventoryItem;
     public override void Interact()
     {
         print("Pick up " + this);
         var playerInventory = player.GetComponent<PlayerInventoryManager>().inventory;
-        if(playerInventory.AddItem(new InventoryItem(item), 1))
+        if(isNew == true)
         {
-            Destroy(this.gameObject);
+            if (playerInventory.AddItem(new InventoryItem(item), 1))
+            {
+                Destroy(this.gameObject);
+            }
         }
+        else if(isNew == false)
+        {
+            if (playerInventory.AddItem(inventoryItem, 1))
+            {
+                Destroy(this.gameObject);
+            }
+        }
+        
     }
 
     public void LateUpdate()

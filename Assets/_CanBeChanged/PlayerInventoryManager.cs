@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerInventoryManager : MonoBehaviour
 {
-    MainStats playerMainStats;
     bool hasInventoryInitiated = false;
-    //public MouseItem mouseItem = new MouseItem();
     public GameObject inventoryPanel;
     public InventorySO inventory;
     public InventorySO equipmentInventory;
@@ -23,7 +21,6 @@ public class PlayerInventoryManager : MonoBehaviour
 
     private void Start()
     {
-        playerMainStats = GetComponent<MainStats>();
         boneCombiner = new BoneCombiner(gameObject);
         for (int i = 0; i < attributeTypes.Length; i++)
         {
@@ -79,10 +76,14 @@ public class PlayerInventoryManager : MonoBehaviour
                         case ItemType.SpellBook:
                             Destroy(equippedSpellBook.gameObject);
                             break;
+                        case ItemType.LifeRecover:
+                            break;
+                        case ItemType.ManaRecover:
+                            break;
+                        case ItemType.Spell:
+                            break;
                     }
                 }
-                break;
-            case InterfaceType.Chest:
                 break;
             default:
                 break;
@@ -136,8 +137,6 @@ public class PlayerInventoryManager : MonoBehaviour
                     }
                 }
 
-                break;
-            case InterfaceType.Chest:
                 break;
             default:
                 break;

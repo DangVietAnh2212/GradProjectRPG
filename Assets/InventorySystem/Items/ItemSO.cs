@@ -43,6 +43,7 @@ public class ItemSO : ScriptableObject
 [System.Serializable]
 public class InventoryItem
 {
+    //public bool isNew = true;
     public string name;
     public int ID = -1;
     public ItemBuff[] buffs;
@@ -59,7 +60,8 @@ public class InventoryItem
         ID = itemSO.inventoryItemData.ID;
         buffs = new ItemBuff[itemSO.inventoryItemData.buffs.Length];
         isStackable = itemSO.isStackable;
-        for(int i = 0; i < buffs.Length; i++)
+
+        for (int i = 0; i < buffs.Length; i++)
         {
             buffs[i] = new ItemBuff(itemSO.inventoryItemData.buffs[i].min, itemSO.inventoryItemData.buffs[i].max);
             buffs[i].attributeType = itemSO.inventoryItemData.buffs[i].attributeType;

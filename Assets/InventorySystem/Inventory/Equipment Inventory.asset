@@ -51,4 +51,53 @@ MonoBehaviour:
         buffs: []
         isStackable: 0
       amount: 0
+    - allowedItems: 00000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 01000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 07000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 07000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 07000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 07000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
+    - allowedItems: 07000000
+      inventoryItem:
+        name: 
+        ID: -1
+        buffs: []
+        isStackable: 0
+      amount: 0
   interfaceType: 1

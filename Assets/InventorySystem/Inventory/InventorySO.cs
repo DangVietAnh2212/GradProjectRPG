@@ -6,8 +6,7 @@ using UnityEngine;
 public enum InterfaceType
 {
     Inventory,
-    Equipment,
-    Chest
+    Equipment
 }
 
 /// <summary>
@@ -147,7 +146,7 @@ public class InventorySO : ScriptableObject
             slotsContainer.Clear();
         if(interfaceType == InterfaceType.Equipment)
         {
-            ItemType[] allowedSlots = new ItemType[5];
+            ItemType[] allowedSlots = new ItemType[12];
             for (int i = 0; i < allowedSlots.Length; i++)
             {
                 switch (i)
@@ -166,6 +165,27 @@ public class InventorySO : ScriptableObject
                         break;
                     case 4:
                         allowedSlots[i] = ItemType.Boots;
+                        break;
+                    case 5:
+                        allowedSlots[i] = ItemType.LifeRecover;
+                        break;
+                    case 6:
+                        allowedSlots[i] = ItemType.ManaRecover;
+                        break;
+                    case 7:
+                        allowedSlots[i] = ItemType.Spell;
+                        break;
+                    case 8:
+                        allowedSlots[i] = ItemType.Spell;
+                        break;
+                    case 9:
+                        allowedSlots[i] = ItemType.Spell;
+                        break;
+                    case 10:
+                        allowedSlots[i] = ItemType.Spell;
+                        break;
+                    case 11:
+                        allowedSlots[i] = ItemType.Spell;
                         break;
                 }
             }
