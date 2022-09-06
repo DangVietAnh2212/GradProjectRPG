@@ -8,6 +8,11 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
+    public GameObject levelUI;
+    public GameObject unallocatedPointText;
+    public GameObject[] unallocatedPointBtns;
+    public GameObject levelUpButtonRef;
+    int pointToAllocate = 0;
     public GameObject expUI;
     public GameObject expText;
     Image expFill;
@@ -23,6 +28,7 @@ public class Level : MonoBehaviour
     {
         nextLevelExp = GetNextLevelExp();
         expFill = expUI.GetComponent<Image>();
+        LevelEvent += UpdateLevelText;
     }
     private void Update()
     {
@@ -37,14 +43,61 @@ public class Level : MonoBehaviour
         {
             currentLevel++;
             LevelEvent.Invoke();
+            pointToAllocate += 5;
             nextLevelExp = GetNextLevelExp();
             currentExp = 0;
         }
-       
+
+        if (pointToAllocate > 0)
+        {
+            levelUpButtonRef.SetActive(true);
+            for (int i = 0; i < unallocatedPointBtns.Length; i++)
+            {
+                unallocatedPointBtns[i].SetActive(true);
+            }
+        }
+        else if (pointToAllocate <= 0)
+        {
+            levelUpButtonRef.SetActive(false);
+            for (int i = 0; i < unallocatedPointBtns.Length; i++)
+            {
+                unallocatedPointBtns[i].SetActive(false);
+            }
+        }
+        UpdatePointToAllocateText();
     }
 
     public int GetNextLevelExp()
     {
         return (int)(baseExpBeforeLvup * Mathf.Pow(expMulEachLv, currentLevel));
+    }
+
+    public void UpdatePointToAllocate()
+    {
+        pointToAllocate--;
+    }
+
+    public void UpdatePointToAllocateText()
+    {
+        if (unallocatedPointText.GetComponent<TextMeshProUGUI>())
+            unallocatedPointText.GetComponent<TextMeshProUGUI>().text =
+                $"You have {pointToAllocate} unallocated points";
+    }
+
+    public void UpdateLevelText()
+    {
+        if (levelUI.GetComponent<TextMeshProUGUI>())
+            levelUI.GetComponent<TextMeshProUGUI>().text =
+                $"Your hero is at level {currentLevel}";
+    }
+    
+    public void ResetTempUnallocatedPoint()
+    {
+        for (int i = 0; i < unallocatedPointBtns.Length; i++)
+        {
+            int unallocatedPoint = 
+                Convert.ToInt32(unallocatedPointBtns[i].GetComponent<TempStatsButton>().targetFieldRef.GetComponent<TextMeshProUGUI>().text);
+            pointToAllocate += unallocatedPoint;
+        }
     }
 }

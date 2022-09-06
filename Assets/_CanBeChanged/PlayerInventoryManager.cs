@@ -172,33 +172,7 @@ public class PlayerInventoryManager : MonoBehaviour
     public void AttributeModifierNotice(AttributeManager attribute)
     {
         Debug.Log(string.Concat(attribute.attributeType, " was updated! The value is now:  ", attribute.value.ModifiedValue));
-        /*switch (attribute.attributeType)
-        {
-            case AttributeType.Strength:
-                playerMainStats.strength += attribute.value.ModifiedValue;
-                playerMainStats.ResetStats();
-                break;
-            case AttributeType.Dexterity:
-                playerMainStats.dexterity += attribute.value.ModifiedValue;
-                playerMainStats.ResetStats();
-                break;
-            case AttributeType.Intelligence:
-                playerMainStats.intelligence += attribute.value.ModifiedValue;
-                playerMainStats.ResetStats();
-                break;
-            case AttributeType.Life:
-                playerMainStats.maxHealth += attribute.value.ModifiedValue;
-                playerMainStats.ResetStats();
-                break;
-            case AttributeType.Mana:
-                playerMainStats.maxMana += attribute.value.ModifiedValue;
-                playerMainStats.ResetStats();
-                break;
-            case AttributeType.Attack:
-                break;
-            case AttributeType.Defence:
-                break;
-        }*/
+        
     }
 
     private void OnApplicationQuit()

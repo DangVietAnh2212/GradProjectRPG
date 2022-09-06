@@ -41,12 +41,16 @@ public class PlayerController : MonoBehaviour
                     MouseData.itemOnMouse = false;
                     Destroy(MouseData.itemOnMouseDisplay);//Destroy the item on mouse and 
                     //give back the color of the inventory slot
-                    Vector3 dropLocation = transform.position + Vector3.up * 3 + 
-                        new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f,2f));
-                    GameObject obj = Instantiate(groundItemPrefab, dropLocation, Quaternion.identity);
-                    obj.GetComponent<GroundItem>().item = MouseData.tempSlot.ItemSO;
-                    obj.GetComponent<BillBoard>().cam = Camera.main;
-                    obj.GetComponent<Rigidbody>().isKinematic = false;
+
+                    for (int i = 0; i < MouseData.tempSlot.amount; i++)
+                    {
+                        Vector3 dropLocation = transform.position + Vector3.up * 3 +
+                        new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
+                        GameObject obj = Instantiate(groundItemPrefab, dropLocation, Quaternion.identity);
+                        obj.GetComponent<GroundItem>().item = MouseData.tempSlot.ItemSO;
+                        obj.GetComponent<BillBoard>().cam = Camera.main;
+                        obj.GetComponent<Rigidbody>().isKinematic = false;
+                    }
                     MouseData.tempSlot.RemoveItem();
                     //If mouse click outside of UI but you have smt on the mouse, drop it on ground
                 }

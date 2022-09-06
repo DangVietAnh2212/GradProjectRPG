@@ -88,7 +88,7 @@ public abstract class UserInterface : MonoBehaviour
         if (slotsOnInterface[obj].inventoryItem.ID >= 0)
         {
             tempItem = new GameObject();
-            tempItem.transform.SetParent(transform.parent);
+            tempItem.transform.SetParent(transform.parent.transform.parent);//make the canvas the parent of the image
             var img = tempItem.AddComponent<Image>();
             img.sprite = slotsOnInterface[obj].ItemSO.uiDisplay;
             img.raycastTarget = false;
@@ -155,6 +155,12 @@ public abstract class UserInterface : MonoBehaviour
         }
     }
 
+    public void ClearItemOnMouse()
+    {
+        MouseData.itemOnMouseRef.GetComponentInChildren<Image>().color = MouseData.colorOfItemOnMouse;
+        MouseData.itemOnMouse = false;
+        Destroy(MouseData.itemOnMouseDisplay);
+    }
 }
 
 public static class MouseData
@@ -162,7 +168,7 @@ public static class MouseData
     public static UserInterface interfaceWhenMouseIsOver;
     public static GameObject tempItemBeingDragged;
     public static GameObject slotHoverOver;
-    //public static GameObject itemSavedOnMouse;
+    //this part is not doing anything right now
 
     public static GameObject itemOnMouseDisplay;
     public static Color colorOfItemOnMouse;
