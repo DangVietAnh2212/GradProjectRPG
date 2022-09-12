@@ -22,6 +22,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 03000000
       inventoryItem:
@@ -29,6 +39,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 04000000
       inventoryItem:
@@ -36,6 +56,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 06000000
       inventoryItem:
@@ -43,6 +73,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 05000000
       inventoryItem:
@@ -50,6 +90,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 00000000
       inventoryItem:
@@ -57,6 +107,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 01000000
       inventoryItem:
@@ -64,6 +124,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 07000000
       inventoryItem:
@@ -71,6 +141,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 07000000
       inventoryItem:
@@ -78,6 +158,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 07000000
       inventoryItem:
@@ -85,6 +175,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 07000000
       inventoryItem:
@@ -92,6 +192,16 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
     - allowedItems: 07000000
       inventoryItem:
@@ -99,5 +209,15 @@ MonoBehaviour:
         ID: -1
         buffs: []
         isStackable: 0
+        spell:
+          spellType: 0
+          minRollBaseDamage: 0
+          maxRollBaseDamage: 0
+          baseDamageValue: 0
+          minBaseDamage: 0
+          maxBaseDamage: 0
+          manaCost: 0
+          lifeDuration: 0
+          AOE: 0
       amount: 0
   interfaceType: 1

@@ -47,7 +47,7 @@ public class MainStats : MonoBehaviour
         {
             currentHealth += healthRegen * Time.deltaTime;
             currentMana += manaRegen * Time.deltaTime;
-            print($"current health: {healthRegen}; current mana: {manaRegen}");
+            //print($"current health: {healthRegen}; current mana: {manaRegen}");
             yield return null;
         }
        
@@ -84,7 +84,7 @@ public class MainStats : MonoBehaviour
             currentMana = maxMana;
         if (currentMana <= 0)
             currentMana = 0;
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             currentHealth -= 100;
             currentMana -= 100;
@@ -161,12 +161,28 @@ public class MainStats : MonoBehaviour
         baseInt += Convert.ToInt32(mainAttributeChanges[2].GetComponent<TextMeshProUGUI>().text);
         ResetStats();
     }//Apply attribute bonus from allocate points
+
+    public float DamageAfterStrBonus(float damage)
+    {
+        float finalDamage = (damage + currentAtkPoint) * Mathf.Pow(UtilityClass.percentIncreasedPerStr, strength);
+        return finalDamage;
+    }
+
+    public float DurationAfterDexBonus(float duration)
+    {
+        return duration * Mathf.Pow(UtilityClass.percentIncreasedPerDex, dexterity);
+    }
+
+    public float AOEAfterIntBonus(float AOE)
+    {
+        return AOE * Mathf.Pow(UtilityClass.percentIncreasedPerInt, intelligence);
+    }
 }
 
 public static class UtilityClass
 {
     public static float baseRegen = 3f;
-    public static float percentIncreasedPerStr = 1.05f;
-    public static float percentIncreasedPerDex = 1.01f;
-    public static float percentIncreasedPerInt = 1.03f;
+    public static float percentIncreasedPerStr = 1.03f;
+    public static float percentIncreasedPerDex = 1.006f;
+    public static float percentIncreasedPerInt = 1.02f;
 }

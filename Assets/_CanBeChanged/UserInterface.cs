@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public abstract class UserInterface : MonoBehaviour
 {
     //bool itemOnMouse = false;
+    public TextMeshProUGUI itemNameText;
+    public RectTransform itemInform;
 
     public float sizeOfSlot = 90f;
 
@@ -59,14 +61,69 @@ public abstract class UserInterface : MonoBehaviour
     public void OnEnter(GameObject obj)
     {
         MouseData.slotHoverOver = obj;
+        InventorySlot hoverSlot = slotsOnInterface[MouseData.slotHoverOver];
+        if (hoverSlot.inventoryItem.ID >= 0)
+        {
+            itemInform.gameObject.SetActive(true);
+            itemInform.transform.position = new Vector2(Input.mousePosition.x - itemInform.sizeDelta.x/2, Input.mousePosition.y);
+            itemNameText.text = hoverSlot.inventoryItem.name;
+            if (hoverSlot.inventoryItem.isStackable)
+            {
+                itemNameText.text += "\n" + $"Amount: {hoverSlot.amount}";
+                itemNameText.text += "\n" + hoverSlot.ItemSO.description;
+            }
+            else if(hoverSlot.inventoryItem.buffs.Length > 0)
+            {
+                for (int i = 0; i < hoverSlot.inventoryItem.buffs.Length; i++)
+                {
+                    switch (hoverSlot.inventoryItem.buffs[i].attributeType)
+                    {
+                        case AttributeType.Strength:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} <color=#FF0000>Strength</color> ";
+                            break;
+                        case AttributeType.Dexterity:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} <color=#00C014>Dexterity</color> ";
+                            break;
+                        case AttributeType.Intelligence:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} <color=#00A6D9>Intellect</color> ";
+                            break;
+                        case AttributeType.Life:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} Health";
+                            break;
+                        case AttributeType.Mana:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} Mana";
+                            break;
+                        case AttributeType.Attack:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} Attack";
+                            break;
+                        case AttributeType.Defence:
+                            itemNameText.text += "\n" + $"+{hoverSlot.inventoryItem.buffs[i].value} Defense";
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                itemNameText.text += "\n" + hoverSlot.ItemSO.description;
+                itemNameText.text += "\n" + $"Damage: {hoverSlot.inventoryItem.spell.minBaseDamage:n0} - {hoverSlot.inventoryItem.spell.maxBaseDamage:n0}";
+                itemNameText.text += "\n" + $"Mana Cost: {hoverSlot.inventoryItem.spell.manaCost}";
+                itemNameText.text += "\n" + $"Base duration: {hoverSlot.inventoryItem.spell.lifeDuration}";
+                itemNameText.text += "\n" + $"Base AOE: {hoverSlot.inventoryItem.spell.AOE}";
+                itemInform.transform.position = new Vector2(Input.mousePosition.x - itemInform.sizeDelta.x / 2, Input.mousePosition.y + itemInform.sizeDelta.y/2);
+            }
+            itemInform.sizeDelta = new Vector2(itemNameText.preferredWidth > 300 ? 300 : itemNameText.preferredWidth, itemNameText.preferredHeight);
+        }
     }
 
     public void OnExit(GameObject obj)
     {
         MouseData.slotHoverOver = null;
+        itemInform.gameObject.SetActive(false);
     }
 
-    public void OnEnterInterface(GameObject obj)
+    /*public void OnEnterInterface(GameObject obj)
     {
         MouseData.interfaceWhenMouseIsOver = obj.GetComponent<UserInterface>();
     }
@@ -80,7 +137,7 @@ public abstract class UserInterface : MonoBehaviour
     public void OnDragStart(GameObject obj)
     {
         MouseData.tempItemBeingDragged = CreateTempItem(obj);
-    }
+    }*/
 
     public GameObject CreateTempItem(GameObject obj)
     {
@@ -96,7 +153,7 @@ public abstract class UserInterface : MonoBehaviour
         return tempItem;
     }
 
-    public void OnDragEnd(GameObject obj)
+    /*public void OnDragEnd(GameObject obj)
     {
         Destroy(MouseData.tempItemBeingDragged);
         if(MouseData.interfaceWhenMouseIsOver == null)
@@ -118,11 +175,11 @@ public abstract class UserInterface : MonoBehaviour
         {
             MouseData.tempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
         }
-    }
+    }*/
 
     public void OnClick(GameObject obj)
     {
-        if (MouseData.itemOnMouseDisplay == null)
+        if (MouseData.itemOnMouseDisplay == null && gameObject.activeInHierarchy)
         {
             MouseData.itemOnMouseDisplay = CreateTempItem(obj);
             if (MouseData.itemOnMouseDisplay != null)
@@ -170,9 +227,10 @@ public static class MouseData
 {
     public static UserInterface interfaceWhenMouseIsOver;
     public static GameObject tempItemBeingDragged;
-    public static GameObject slotHoverOver;
     //this part is not doing anything right now
 
+
+    public static GameObject slotHoverOver;
     public static GameObject itemOnMouseDisplay;
     public static Color colorOfItemOnMouse;
     public static GameObject itemOnMouseRef;

@@ -24,13 +24,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, 100) && 
-                !animator.GetCurrentAnimatorStateInfo(0).IsName("BaseAnimation.BasicSpellAttack"))
+                !animator.GetCurrentAnimatorStateInfo(0).IsName("BaseAnimation.BasicSpellAttack") &&
+                !animator.GetCurrentAnimatorStateInfo(0).IsName("BaseAnimation.MainHandCast"))
             {
                 if (EventSystem.current.IsPointerOverGameObject()) 
                 {
@@ -73,20 +74,22 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray, out hit, 100))
-            {
-                RemoveFocus();
-                motor.RotateWithoutAgent(hit.point);
-                animator.SetTrigger("basicSpellAtk");
-            }
+            CastXSpellToMousePos("basicSpellAtk");
         }
-               
     }
-
+    public void CastXSpellToMousePos(string xSpellTrigger)
+    {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100))
+        {
+            RemoveFocus();
+            motor.RotateWithoutAgent(hit.point);
+            animator.SetTrigger(xSpellTrigger);
+        }
+    }
     void SetFocus(Interactible newFocus)
     {
         if(newFocus != focus)

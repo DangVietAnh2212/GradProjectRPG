@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 4
   description: 
   inventoryItemData:
-    name: 
+    name: Gloves
     ID: 3
     buffs:
     - attributeType: 4

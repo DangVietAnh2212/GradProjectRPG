@@ -31,7 +31,7 @@ public class PlayerMotor : MonoBehaviour
     public void RotateWithoutAgent(Vector3 currentPoint)
     {
         agent.isStopped = true;
-        rotateSpeed = 30f;
+        rotateSpeed = 360f;
         Vector3 directionToTarget = (currentPoint - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);

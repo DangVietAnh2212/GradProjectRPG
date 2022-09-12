@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2033280120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033280121}
+  m_Layer: 0
+  m_Name: SpellSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2033280121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033280120}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3698000117684735168}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3698000117684735174
 GameObject:
   m_ObjectHideFlags: 0
@@ -16,6 +47,8 @@ GameObject:
   - component: {fileID: 3698000117684735164}
   - component: {fileID: 3698000117684735167}
   - component: {fileID: 3698000117684735166}
+  - component: {fileID: 1429634885}
+  - component: {fileID: 1429634886}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -36,6 +69,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3808733562413223833}
+  - {fileID: 2033280121}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +84,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 5
-  m_Acceleration: 35
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 7200
   m_StoppingDistance: 0
@@ -103,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee6bee3ca041a4d95a484157085c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundItemPrefab: {fileID: 2099179160034430539, guid: 51b35f2705a935446817ddf9117b995e, type: 3}
   movementMask:
     serializedVersion: 2
     m_Bits: 64
@@ -143,9 +178,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d4ff3237fde43d4ca1a14b8938db00c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryPanel: {fileID: 0}
   inventory: {fileID: 11400000, guid: 6345015836e77f048b2b1c47748ac396, type: 2}
   equipmentInventory: {fileID: 11400000, guid: 5d7733b9279178048b83b2acced1df78, type: 2}
-  attributes:
+  attributeTypes:
   - attributeType: 0
     value:
       baseValue: 0
@@ -174,6 +210,67 @@ MonoBehaviour:
     value:
       baseValue: 0
       modifiedValue: 0
+--- !u!114 &1429634885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3698000117684735174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7fe5477cfe4b73459118aafd9eae850, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statsSheetRef: {fileID: 0}
+  mainAttributeChanges:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  healthText: {fileID: 0}
+  manaText: {fileID: 0}
+  healthUI: {fileID: 0}
+  manaUI: {fileID: 0}
+  level: {fileID: 0}
+  maxHealth: 0
+  maxMana: 0
+  currentHealth: 0
+  currentMana: 0
+  healthRegen: 0
+  manaRegen: 0
+  currentMoveSpeed: 0
+  strength: 6
+  dexterity: 6
+  intelligence: 12
+  baseStr: 6
+  baseDex: 6
+  baseInt: 12
+  currentAtkPoint: 0
+  currentDefPoint: 0
+--- !u!114 &1429634886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3698000117684735174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99c81ef55669a96418df5ac6b9e58e86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelUI: {fileID: 0}
+  unallocatedPointText: {fileID: 0}
+  unallocatedPointBtns:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  levelUpButtonRef: {fileID: 0}
+  expUI: {fileID: 0}
+  expText: {fileID: 0}
+  currentLevel: 0
+  currentExp: 0
+  expMulEachLv: 1.25
 --- !u!1001 &3698000117803182194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -248,3 +345,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 675088817bfcb8849bdb7b5fc607e220, type: 3}
   m_PrefabInstance: {fileID: 3698000117803182194}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4580308509074117923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 675088817bfcb8849bdb7b5fc607e220, type: 3}
+  m_PrefabInstance: {fileID: 3698000117803182194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1356156225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4580308509074117923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d174a114018dc8f4db0b681c38257b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  basicSpellPrefab: {fileID: 792435002665499423, guid: 15404ee970bdfda48ba8eff561587788, type: 3}
+  spellPrefab: {fileID: 0}
+  spellSpawnPosTransform: {fileID: 2033280121}

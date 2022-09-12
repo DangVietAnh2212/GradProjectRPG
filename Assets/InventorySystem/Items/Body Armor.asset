@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 3
   description: 
   inventoryItemData:
-    name: 
+    name: Some kind of Body Armour
     ID: 0
     buffs:
     - attributeType: 0

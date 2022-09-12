@@ -76,12 +76,6 @@ public class PlayerInventoryManager : MonoBehaviour
                         case ItemType.SpellBook:
                             Destroy(equippedSpellBook.gameObject);
                             break;
-                        case ItemType.LifeRecover:
-                            break;
-                        case ItemType.ManaRecover:
-                            break;
-                        case ItemType.Spell:
-                            break;
                     }
                 }
                 break;

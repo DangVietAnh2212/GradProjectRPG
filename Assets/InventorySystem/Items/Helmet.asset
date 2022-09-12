@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 2
   description: 
   inventoryItemData:
-    name: 
+    name: Some kind of Helmet
     ID: 4
     buffs:
     - attributeType: 3

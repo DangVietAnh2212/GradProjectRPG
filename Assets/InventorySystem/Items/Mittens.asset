@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 4
   description: 
   inventoryItemData:
-    name: 
+    name: Mittens
     ID: 8
     buffs:
     - attributeType: 3

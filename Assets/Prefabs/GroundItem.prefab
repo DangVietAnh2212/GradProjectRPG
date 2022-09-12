@@ -142,6 +142,17 @@ MonoBehaviour:
     ID: -1
     buffs: []
     isStackable: 0
+    spell:
+      spellType: 0
+      minRollBaseDamage: 0
+      maxRollBaseDamage: 0
+      baseDamageValue: 0
+      minBaseDamage: 0
+      maxBaseDamage: 0
+      manaCost: 0
+      speed: 0
+      lifeDuration: 0
+      AOE: 0
 --- !u!114 &2099179160034430519
 MonoBehaviour:
   m_ObjectHideFlags: 0

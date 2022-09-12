@@ -17,7 +17,7 @@ MonoBehaviour:
   itemType: 5
   description: 
   inventoryItemData:
-    name: 
+    name: High Boots
     ID: 5
     buffs:
     - attributeType: 3
@@ -30,7 +30,7 @@ MonoBehaviour:
       max: 20
     - attributeType: 1
       value: 0
-      min: 50
+      min: 1
       max: 100
     - attributeType: 6
       value: 0

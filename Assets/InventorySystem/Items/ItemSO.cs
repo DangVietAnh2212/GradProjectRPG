@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
 public enum ItemType
 {
     LifeRecover,
@@ -24,11 +23,13 @@ public enum ItemType
 [CreateAssetMenu(fileName = "New Item", menuName = "Inventory System/Items/Item")]
 public class ItemSO : ScriptableObject
 {
+    public GameObject spellPrefab;
     public Sprite uiDisplay;
     public GameObject displayCharEquipment;
     public ItemType itemType;
     [TextArea(15, 20)]
     public string description;
+    public Spell spell = new Spell();
     public InventoryItem inventoryItemData = new InventoryItem();
     public bool isStackable = false;
     public InventoryItem CreateItem()
@@ -48,6 +49,7 @@ public class InventoryItem
     public int ID = -1;
     public ItemBuff[] buffs;
     public bool isStackable;
+    public Spell spell;
 
     public InventoryItem()
     {
@@ -58,9 +60,11 @@ public class InventoryItem
     {
         name = itemSO.name;
         ID = itemSO.inventoryItemData.ID;
-        buffs = new ItemBuff[itemSO.inventoryItemData.buffs.Length];
         isStackable = itemSO.isStackable;
 
+        spell = new Spell(itemSO);
+
+        buffs = new ItemBuff[itemSO.inventoryItemData.buffs.Length];
         for (int i = 0; i < buffs.Length; i++)
         {
             buffs[i] = new ItemBuff(itemSO.inventoryItemData.buffs[i].min, itemSO.inventoryItemData.buffs[i].max);

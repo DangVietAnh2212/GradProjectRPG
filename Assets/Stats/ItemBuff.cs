@@ -29,7 +29,6 @@ public class ItemBuff : IModifier
         value = Random.Range(min, max);
     }
 }
-
 public enum AttributeType
 {
     Strength,

@@ -13,11 +13,32 @@ MonoBehaviour:
   m_Name: Bone
   m_EditorClassIdentifier: 
   uiDisplay: {fileID: 21300000, guid: 277d33418060b0b4e9f45a582b4ac09c, type: 3}
+  displayCharEquipment: {fileID: 0}
   itemType: 8
-  description: 
+  description: The leftovers of those you slain
+  spell:
+    spellType: 0
+    minRollBaseDamage: 0
+    maxRollBaseDamage: 0
+    baseDamageValue: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    manaCost: 0
+    lifeDuration: 0
+    AOE: 0
   inventoryItemData:
     name: 
-    ID: -1
+    ID: 1
     buffs: []
     isStackable: 0
+    spell:
+      spellType: 0
+      minRollBaseDamage: 0
+      maxRollBaseDamage: 0
+      baseDamageValue: 0
+      minBaseDamage: 0
+      maxBaseDamage: 0
+      manaCost: 0
+      lifeDuration: 0
+      AOE: 0
   isStackable: 1

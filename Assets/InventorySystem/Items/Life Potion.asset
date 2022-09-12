@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Life Potion
   m_EditorClassIdentifier: 
   uiDisplay: {fileID: 21300000, guid: eb00721bea83d62459345d15a3eec730, type: 3}
+  displayCharEquipment: {fileID: 0}
   itemType: 0
   description: 
   inventoryItemData:
-    name: 
+    name: Life Potion
     ID: -1
     buffs: []
     isStackable: 0
