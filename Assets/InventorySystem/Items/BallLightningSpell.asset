@@ -20,12 +20,12 @@ MonoBehaviour:
   spell:
     spellType: 2
     minRollBaseDamage: 1
-    maxRollBaseDamage: 20
+    maxRollBaseDamage: 10
     baseDamageValue: 0
     minBaseDamage: 0
     maxBaseDamage: 0
     manaCost: 75
-    speed: 5
+    speed: 2
     lifeDuration: 3
     AOE: 3
   inventoryItemData:

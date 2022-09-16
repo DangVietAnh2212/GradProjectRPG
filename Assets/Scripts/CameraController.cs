@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public Transform target;
-    public Vector3 OffsetFromCam = new Vector3(0.7f, -0.7f, 0.5f);
+    public Vector3 OffsetFromCam = new Vector3(0.7f, -1.4f, 0.5f);
     private float currentZoom = 10f;
     public float targetHeight = 2f;
     public float zoomSpeed = 5f;

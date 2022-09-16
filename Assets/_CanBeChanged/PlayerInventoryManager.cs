@@ -164,7 +164,7 @@ public class PlayerInventoryManager : MonoBehaviour
 
     public void AttributeModifierNotice(AttributeManager attribute)
     {
-        Debug.Log(string.Concat(attribute.attributeType, " was updated! The value is now:  ", attribute.value.ModifiedValue));
+        //Debug.Log(string.Concat(attribute.attributeType, " was updated! The value is now:  ", attribute.value.ModifiedValue));
         
     }
 

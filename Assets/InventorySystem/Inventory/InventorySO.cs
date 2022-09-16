@@ -269,7 +269,6 @@ public class InventorySlot
         {
             OnBeforeUpdate.Invoke(this);
         }
-
         this.inventoryItem = item;
         this.amount = amount;
         if (OnAfterUpdate != null) 

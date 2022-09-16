@@ -5,6 +5,7 @@ using UnityEngine;
 public class BillBoard : MonoBehaviour
 {
     public Camera cam;
+
     private void LateUpdate()
     {
         transform.forward = cam.transform.forward;

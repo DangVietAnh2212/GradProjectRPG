@@ -78,21 +78,24 @@ public class MainStats : MonoBehaviour
     {
         if(currentHealth > maxHealth)
             currentHealth = maxHealth;
-        if (currentHealth <= 0)
-            currentHealth = 0;
         if (currentMana > maxMana)
             currentMana = maxMana;
-        if (currentMana <= 0)
-            currentMana = 0;
+
         if (Input.GetKeyDown(KeyCode.H))
         {
             currentHealth -= 100;
             currentMana -= 100;
         }
-        healthFill.fillAmount = currentHealth / maxHealth;
-        manaFill.fillAmount = currentMana / maxMana;
-        healthText.GetComponent<TextMeshProUGUI>().text = currentHealth.ToString("n0");
-        manaText.GetComponent<TextMeshProUGUI>().text = currentMana.ToString("n0");
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            gameObject.GetComponentInChildren<Animator>().SetBool("isDead", true);
+            StopAllCoroutines();
+        }
+
+        if (currentMana <= 0)
+            currentMana = 0;
     }
 
     private void LateUpdate()
@@ -103,6 +106,10 @@ public class MainStats : MonoBehaviour
             statsSheetRef.SetActive(false);
             hasStatsSheetInitiated = true;  
         }
+        healthFill.fillAmount = currentHealth / maxHealth;
+        manaFill.fillAmount = currentMana / maxMana;
+        healthText.GetComponent<TextMeshProUGUI>().text = currentHealth.ToString("n0");
+        manaText.GetComponent<TextMeshProUGUI>().text = currentMana.ToString("n0");
     }
     private void SetAttribute()
     {
@@ -177,6 +184,30 @@ public class MainStats : MonoBehaviour
     {
         return AOE * Mathf.Pow(UtilityClass.percentIncreasedPerInt, intelligence);
     }
+
+    public void TakeDamage(float dmgTaken)
+    {
+        currentHealth -= UtilityClass.DamageAfterDef(dmgTaken, currentDefPoint);
+        if(currentHealth < 0)
+            currentHealth = 0;
+    }
+
+    public void UseMana(float manaUsed)
+    {
+        if (IsEnoughMana(manaUsed))
+            currentMana -= manaUsed;
+        else
+        {
+            //Play sound not enough mana
+        }
+    }
+
+    public bool IsEnoughMana(float manaUsed)
+    {
+        if (currentMana >= manaUsed)
+            return true;
+        return false;
+    }
 }
 
 public static class UtilityClass
@@ -185,4 +216,8 @@ public static class UtilityClass
     public static float percentIncreasedPerStr = 1.03f;
     public static float percentIncreasedPerDex = 1.006f;
     public static float percentIncreasedPerInt = 1.02f;
+    public static float DamageAfterDef(float dmg, float def)
+    {
+        return dmg * (1 / (1 + def * 0.01f));
+    }
 }

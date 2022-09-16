@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
                         obj.GetComponent<GroundItem>().item = MouseData.tempSlot.ItemSO;
                         obj.GetComponent<GroundItem>().isNew = false;
                         obj.GetComponent<GroundItem>().inventoryItem = MouseData.tempSlot.inventoryItem;
-                        obj.GetComponent<BillBoard>().cam = Camera.main;
+                        obj.GetComponent<BillBoard>().cam = cam;
                         obj.GetComponent<Rigidbody>().isKinematic = false;
                     }
                     MouseData.tempSlot.RemoveItem();

@@ -30,11 +30,12 @@ public class PlayerMotor : MonoBehaviour
 
     public void RotateWithoutAgent(Vector3 currentPoint)
     {
+        agent.updateRotation = false;
         agent.isStopped = true;
-        rotateSpeed = 360f;
+        rotateSpeed = 720f;
         Vector3 directionToTarget = (currentPoint - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
+        transform.rotation = lookRotation;/*Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);*/
     }
 
     public void FollowTarget(Interactible newTarget)
@@ -59,7 +60,7 @@ public class PlayerMotor : MonoBehaviour
         Vector3 directionToTarget = (target.position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(directionToTarget.x, 0, directionToTarget.z));
         //using new Vector3 to avoid looking up and down
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);
         //5f is the speed of the rotation (smooth the rotation)
     }
 }
