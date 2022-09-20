@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IceSpearBehaviour : SpellBehaviour
@@ -15,10 +12,16 @@ public class IceSpearBehaviour : SpellBehaviour
     static float childSpeed;
     static float childDuration;
     static float childAOE;
+
+    private void Awake()
+    {
+
+    }
     protected override void Start()
     {
         if (!haveForked)
         {
+            FindObjectOfType<AudioManager>().Play("IceForm");
             childMinDamage = localMinDamage = minDamage;
             childMaxDamage = localMaxDamage = maxDamage;
             childSpeed = localSpeed = speed;
@@ -40,6 +43,7 @@ public class IceSpearBehaviour : SpellBehaviour
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         if (!haveForked)
         {
+            FindObjectOfType<AudioManager>().Play("IceShot");
             currentAngle = baseAngle * localAOE / baseAOE;
             GameObject firstSpear = Instantiate(gameObject, transform.position, Quaternion.LookRotation(transform.forward));
             firstSpear.transform.Rotate(Vector3.up * -currentAngle / 2);
@@ -68,7 +72,11 @@ public class IceSpearBehaviour : SpellBehaviour
             haveForked = true;
             Enemy enemy = other.GetComponent<Enemy>();
             float dmg = RollDamage(localMinDamage, localMaxDamage);
-            enemy.TakeDamage(UtilityClass.DamageAfterDef(dmg, enemy.currentDefPoint));
+            bool isKilled = enemy.TakeDamage(UtilityClass.DamageAfterDef(dmg, enemy.currentDefPoint));
+            /*if (isKilled)
+                parent.GetComponent<MainStats>().lastMonsterKill = enemy.monsterType;*/
+            if (isKilled)
+                parent.GetComponent<QuestManager>().UpdateKillQuest(enemy.monsterType);
             OnLifeEnd();
         }
     }

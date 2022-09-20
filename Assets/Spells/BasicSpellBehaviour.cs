@@ -17,7 +17,7 @@ public class BasicSpellBehaviour : MonoBehaviour
         speed = 10f;
         lifeDuration = 1f;
         startTime = Time.time;
-        baseDamage = 5f;
+        baseDamage = 15f;
     }
 
     // Update is called once per frame
@@ -41,7 +41,11 @@ public class BasicSpellBehaviour : MonoBehaviour
         {
             Enemy enemy = other.GetComponent<Enemy>();
             float dmg = mainStats.DamageAfterStrBonus(baseDamage);
-            enemy.TakeDamage(UtilityClass.DamageAfterDef(dmg, enemy.currentDefPoint));
+            bool isKilled = enemy.TakeDamage(UtilityClass.DamageAfterDef(dmg, enemy.currentDefPoint));
+            /*if (isKilled)
+                mainStats.lastMonsterKill = enemy.monsterType;*/
+            if (isKilled)
+                mainStats.gameObject.GetComponent<QuestManager>().UpdateKillQuest(enemy.monsterType);
             OnLifeEnd();
         }
            
@@ -52,4 +56,5 @@ public class BasicSpellBehaviour : MonoBehaviour
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
+
 }

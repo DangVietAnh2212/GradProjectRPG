@@ -14,10 +14,6 @@ public class AttributeUpdateForUI : MonoBehaviour
         {
             Debug.Log("Cannot find player!!!");
         }
-    }
-
-    private void Start()
-    {
         switch (attributeName)
         {
             case "str":
@@ -50,7 +46,7 @@ public class AttributeUpdateForUI : MonoBehaviour
             case "manaReg":
                 playerObject.GetComponent<MainStats>().MainStatsEvent += UpdateUIManaReg;
                 break;
-        }        
+        }
     }
 
     public void UpdateUIManaReg()

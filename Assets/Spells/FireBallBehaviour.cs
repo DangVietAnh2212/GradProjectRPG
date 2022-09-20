@@ -22,6 +22,7 @@ public class FireBallBehaviour : SpellBehaviour
 
     protected override void OnLifeEnd()
     {
+        FindObjectOfType<AudioManager>().Play("FireExplosion");
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         //explosion.transform.GetChild(0).localScale = Vector3.one * 10;
         AOEDamage(transform.position, AOE, localMinDamage, localMaxDamage);

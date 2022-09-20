@@ -32,6 +32,7 @@ public class ItemSO : ScriptableObject
     public Spell spell = new Spell();
     public InventoryItem inventoryItemData = new InventoryItem();
     public bool isStackable = false;
+    public int healValue;
     public InventoryItem CreateItem()
     {
         InventoryItem newInventoryItem = new InventoryItem(this);
@@ -50,7 +51,7 @@ public class InventoryItem
     public ItemBuff[] buffs;
     public bool isStackable;
     public Spell spell;
-
+    public int healValue;
     public InventoryItem()
     {
         name = "";
@@ -61,6 +62,8 @@ public class InventoryItem
         name = itemSO.name;
         ID = itemSO.inventoryItemData.ID;
         isStackable = itemSO.isStackable;
+
+        healValue = itemSO.healValue;   
 
         spell = new Spell(itemSO);
 

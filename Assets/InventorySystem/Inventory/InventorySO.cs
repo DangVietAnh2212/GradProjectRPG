@@ -2,7 +2,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-
+using System;
 public enum InterfaceType
 {
     Inventory,
@@ -26,10 +26,22 @@ public class InventorySO : ScriptableObject
         if (EmptySlotCount <= 0)
             return false;
         InventorySlot slot = FindItemOnInventory(inventoryItem);
-        if (!itemDatabase.itemSOs[inventoryItem.ID].isStackable || slot == null)
+        try
         {
-            PutItemToEmptySlot(inventoryItem, amount);
-            return true;
+            if (!itemDatabase.itemSOs[inventoryItem.ID].isStackable || slot == null)
+            {
+                PutItemToEmptySlot(inventoryItem, amount);
+                return true;
+            }
+        }
+        catch
+        {
+            itemDatabase.UpdateID();
+            if (!itemDatabase.itemSOs[inventoryItem.ID].isStackable || slot == null)
+            {
+                PutItemToEmptySlot(inventoryItem, amount);
+                return true;
+            }
         }
         slot.AddAmount(amount);
         return true;
@@ -83,7 +95,16 @@ public class InventorySO : ScriptableObject
         if (slot2.CanPlaceInSlot(slot1.ItemSO) && slot1.CanPlaceInSlot(slot2.ItemSO))
         {
             InventorySlot temp = new InventorySlot(slot2.inventoryItem, slot2.amount);
-            Debug.Log("Inside Swap Item In Slot");
+            if (slot1.ItemSO != null &&
+                slot2.ItemSO != null &&
+                slot1.ItemSO.isStackable && 
+                slot2.ItemSO.isStackable && 
+                slot1.ItemSO.itemType == slot2.ItemSO.itemType)
+            {
+                slot1.UpdateSlot(slot1.inventoryItem, slot2.amount + slot1.amount);
+                slot2.RemoveItem();
+                return;
+            }
             slot2.UpdateSlot(slot1.inventoryItem, slot1.amount);
             slot1.UpdateSlot(temp.inventoryItem, temp.amount);
         }

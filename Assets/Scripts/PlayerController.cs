@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask movementMask;
     PlayerMotor motor;
     Animator animator;
-    public Interactible focus;
+    public Interactable focus;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,10 +59,9 @@ public class PlayerController : MonoBehaviour
                     //If mouse click outside of UI but you have smt on the mouse, drop it on ground
                 }
 
-                Interactible interactible = hit.collider.GetComponent<Interactible>();
+                Interactable interactible = hit.collider.GetComponent<Interactable>();
                 if(interactible != null)
                 {
-                    print("Set Focus");
                     SetFocus(interactible);
                 }
                 else if (Physics.Raycast(ray, out hit, 100, movementMask))
@@ -90,7 +89,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger(xSpellTrigger);
         }
     }
-    void SetFocus(Interactible newFocus)
+    void SetFocus(Interactable newFocus)
     {
         if(newFocus != focus)
         {

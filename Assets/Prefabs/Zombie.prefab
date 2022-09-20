@@ -495,6 +495,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b50d08041ad6b4aabaa03f4461f9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSpawnPref: {fileID: 2099179160034430516, guid: 51b35f2705a935446817ddf9117b995e, type: 3}
+  itemDatabase: {fileID: 11400000, guid: 49b47ad216edaf14295fea2846028b5a, type: 2}
+  minMaxHealth: {x: 100, y: 300}
+  minMaxDef: {x: 10, y: 75}
+  minMaxBaseDmg: {x: 20, y: 100}
+  spawner: {fileID: 0}
   currentDefPoint: 50
   maxHealth: 300
   currentHealth: 300

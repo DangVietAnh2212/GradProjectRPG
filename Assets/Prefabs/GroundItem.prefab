@@ -153,6 +153,7 @@ MonoBehaviour:
       speed: 0
       lifeDuration: 0
       AOE: 0
+    healValue: 0
 --- !u!114 &2099179160034430519
 MonoBehaviour:
   m_ObjectHideFlags: 0

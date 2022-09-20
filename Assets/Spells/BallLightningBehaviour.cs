@@ -6,6 +6,12 @@ public class BallLightningBehaviour : SpellBehaviour
 {
     const float baseAOE = 2f;
     float timeBetweenPulse = 0.5f;
+    private void Awake()
+    {
+        if(UtilityClass.activeNumber == 0)
+            FindObjectOfType<AudioManager>().Play("Electricity");
+        UtilityClass.activeNumber++;
+    }
     protected override void Start()
     {
         localMinDamage = minDamage;
@@ -22,6 +28,10 @@ public class BallLightningBehaviour : SpellBehaviour
     }
     protected override void OnLifeEnd()
     {
+        UtilityClass.activeNumber--;
+        if(UtilityClass.activeNumber == 0)
+            FindObjectOfType<AudioManager>().StopPlaying("Electricity");
+        FindObjectOfType<AudioManager>().Play("Thunder");
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         for (int i = 0; i < explosion.transform.childCount; i++)
         {

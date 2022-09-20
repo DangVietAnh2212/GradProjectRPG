@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public class GroundItem : Interactible, ISerializationCallbackReceiver
+public class GroundItem : Interactable, ISerializationCallbackReceiver
 {
-
+    float startLifeTime;
+    float lifeDuration = 60f;
     public ItemSO item;
+    [HideInInspector]
     public bool isNew = true;
+    [HideInInspector]
     public InventoryItem inventoryItem;
+
+    void Start()
+    {
+        startLifeTime = Time.time;
+    }
     public override void Interact()
     {
         print("Pick up " + this);
@@ -33,6 +41,8 @@ public class GroundItem : Interactible, ISerializationCallbackReceiver
     public void LateUpdate()
     {
         GetComponentInChildren<SpriteRenderer>().sprite = item.uiDisplay;
+        if(Time.time - startLifeTime >= lifeDuration)
+            Destroy(this.gameObject);
     }
     public void OnAfterDeserialize()
     {

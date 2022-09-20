@@ -387,10 +387,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 4416533893531980019}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.7
+  m_Radius: 0.5
   m_Speed: 3
   m_Acceleration: 32
-  avoidancePriority: 50
+  avoidancePriority: 40
   m_AngularSpeed: 360
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
@@ -438,6 +438,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58287820fe16d994293250f82ea60708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSpawnPref: {fileID: 2099179160034430516, guid: 51b35f2705a935446817ddf9117b995e, type: 3}
+  itemDatabase: {fileID: 11400000, guid: 49b47ad216edaf14295fea2846028b5a, type: 2}
+  minMaxHealth: {x: 100, y: 300}
+  minMaxDef: {x: 10, y: 75}
+  minMaxBaseDmg: {x: 50, y: 150}
+  spawner: {fileID: 0}
   currentDefPoint: 200
   maxHealth: 1500
   currentHealth: 1500

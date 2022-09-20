@@ -12,13 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd3936ccc80a0a546a889fd8a437d7a1, type: 3}
   m_Name: Life Potion
   m_EditorClassIdentifier: 
+  spellPrefab: {fileID: 0}
   uiDisplay: {fileID: 21300000, guid: eb00721bea83d62459345d15a3eec730, type: 3}
   displayCharEquipment: {fileID: 0}
   itemType: 0
   description: 
+  spell:
+    spellType: 0
+    minRollBaseDamage: 0
+    maxRollBaseDamage: 0
+    baseDamageValue: 0
+    minBaseDamage: 0
+    maxBaseDamage: 0
+    manaCost: 0
+    speed: 0
+    lifeDuration: 0
+    AOE: 0
   inventoryItemData:
     name: Life Potion
     ID: -1
     buffs: []
     isStackable: 0
+    spell:
+      spellType: 0
+      minRollBaseDamage: 0
+      maxRollBaseDamage: 0
+      baseDamageValue: 0
+      minBaseDamage: 0
+      maxBaseDamage: 0
+      manaCost: 0
+      speed: 0
+      lifeDuration: 0
+      AOE: 0
   isStackable: 1
+  healValue: 200

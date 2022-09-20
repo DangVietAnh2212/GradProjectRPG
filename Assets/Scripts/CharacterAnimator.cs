@@ -18,5 +18,9 @@ public class CharacterAnimator : MonoBehaviour
     {
         float speedPercent = agent.velocity.magnitude / agent.speed;
         animator.SetFloat("speedPercent", speedPercent, locomotionAnimationSmooth, Time.deltaTime);
+        if (agent.velocity.magnitude > 0.1f)
+            agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        if (agent.velocity.magnitude <= 0.1f)
+            agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
     }
 }

@@ -5,15 +5,23 @@ using UnityEngine.AI;
 
 public class MutantBoss : Enemy
 {
+    float baseBossExp = 2000f;
     bool detectPlayer = false;
     float startTimeTilNextSkill;
     float timeTilNextSkill = 6f;
     public float stompRadius;
     public float roarRadius;
     IEnumerator patrolPointCoroutine;
+
+    private void Awake()
+    {
+        minMaxHealth = new Vector2(1500f, 2500f);
+        minMaxBaseDmg = new Vector2(200f, 300f);
+        minMaxDef = new Vector2(200f, 300f);
+    }
     void Start()
     {
-        maxHealth = 1500f;
+        monsterType = MonsterType.Boss;
         currentHealth = maxHealth;
         healthText.text = $"{currentHealth:0}/{maxHealth:0}";
         healthBar.SetMaxHealth((int)maxHealth);
@@ -24,7 +32,7 @@ public class MutantBoss : Enemy
         attackRange = 1.3f;
         stompRadius = 5f;
         roarRadius = 10f;
-        patrolPointCoroutine = RandomPoint();
+        patrolPointCoroutine = RandomPoint(8f, 5f);
         StartCoroutine(BossBehaviour());
     }
 
@@ -82,6 +90,10 @@ public class MutantBoss : Enemy
 
         if (!isDead && currentHealth <= 0)
         {
+            GetComponent<CapsuleCollider>().enabled = false;
+            FindObjectOfType<AudioManager>().Play("MutantDie");
+            SpawnItem(3);
+            player.GetComponent<Level>().currentExp += (int)(baseBossExp * (1 + spawner.difficulty));
             isDead = true;
             startDespawntime = Time.time;
             agent.isStopped = true;
@@ -93,6 +105,9 @@ public class MutantBoss : Enemy
 
         if (isDead && Time.time - startDespawntime >= despawnTime)
         {
+            if (spawner.difficulty <= 1f)
+                spawner.difficulty += 0.25f;
+            spawner.spawnNumber++;
             Destroy(gameObject);
         }
     }

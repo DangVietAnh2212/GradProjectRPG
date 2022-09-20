@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public abstract class SpellBehaviour : MonoBehaviour
 {
+    [HideInInspector]
+    public static GameObject parent;
     public static float minDamage;
     protected float localMinDamage;
     public static float maxDamage;
@@ -50,7 +51,11 @@ public abstract class SpellBehaviour : MonoBehaviour
             {
                 Enemy enemy = collider.gameObject.GetComponent<Enemy>();
                 float dmg = RollDamage(minDamage, maxDamage);
-                enemy.TakeDamage(UtilityClass.DamageAfterDef(dmg, enemy.currentDefPoint));
+                bool isKilled = enemy.TakeDamage(UtilityClass.DamageAfterDef(dmg, enemy.currentDefPoint));
+                /*if (isKilled)
+                    parent.GetComponent<MainStats>().lastMonsterKill = enemy.monsterType;*/
+                if (isKilled)
+                    parent.GetComponent<QuestManager>().UpdateKillQuest(enemy.monsterType);
             }
         }
     }

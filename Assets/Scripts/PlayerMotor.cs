@@ -38,7 +38,7 @@ public class PlayerMotor : MonoBehaviour
         transform.rotation = lookRotation;/*Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotateSpeed);*/
     }
 
-    public void FollowTarget(Interactible newTarget)
+    public void FollowTarget(Interactable newTarget)
     {
         agent.stoppingDistance = newTarget.radius * 0.8f;
         //come closer to target by 20%

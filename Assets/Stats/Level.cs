@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
+    public GameObject levelUpPref;
     public GameObject levelUI;
     public GameObject unallocatedPointText;
     public GameObject[] unallocatedPointBtns;
@@ -34,19 +35,8 @@ public class Level : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
             currentExp += 20;
-        if (expFill != null)
-        {
-            expFill.fillAmount = (float)currentExp / nextLevelExp;
-            expText.GetComponent<TextMeshProUGUI>().text = $"{currentExp}/{nextLevelExp}";
-        }
-        if(currentExp >= nextLevelExp)
-        {
-            currentLevel++;
-            LevelEvent.Invoke();
-            pointToAllocate += 5;
-            nextLevelExp = GetNextLevelExp();
-            currentExp = 0;
-        }
+
+        UpdateLevel();
 
         if (pointToAllocate > 0)
         {
@@ -65,6 +55,15 @@ public class Level : MonoBehaviour
             }
         }
         UpdatePointToAllocateText();
+    }
+
+    private void LateUpdate()
+    {
+        if (expFill != null)
+        {
+            expFill.fillAmount = (float)currentExp / nextLevelExp;
+            expText.GetComponent<TextMeshProUGUI>().text = $"{currentExp}/{nextLevelExp}";
+        }
     }
 
     public int GetNextLevelExp()
@@ -99,5 +98,19 @@ public class Level : MonoBehaviour
                 Convert.ToInt32(unallocatedPointBtns[i].GetComponent<TempStatsButton>().targetFieldRef.GetComponent<TextMeshProUGUI>().text);
             pointToAllocate += unallocatedPoint;
         }
+    }
+
+    public void UpdateLevel()
+    {
+        if (currentExp >= nextLevelExp)
+        {
+            Instantiate(levelUpPref, transform.position + Vector3.up * 0.5f, Quaternion.identity).transform.parent = transform;
+            FindObjectOfType<AudioManager>().Play("LevelUp");
+            currentLevel++;
+            LevelEvent.Invoke();
+            pointToAllocate += 5;
+            nextLevelExp = GetNextLevelExp();
+            currentExp = 0;
+        }      
     }
 }

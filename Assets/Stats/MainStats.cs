@@ -9,6 +9,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Level))]
 public class MainStats : MonoBehaviour
 {
+    bool isDead = false;
     public GameObject statsSheetRef;
     bool hasStatsSheetInitiated = false;
     public event Action MainStatsEvent;
@@ -87,9 +88,12 @@ public class MainStats : MonoBehaviour
             currentMana -= 100;
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && !isDead)
         {
+            isDead = true;  
+            print("isDead: true");
             currentHealth = 0;
+            FindObjectOfType<AudioManager>().Play("PlayerDeath");
             gameObject.GetComponentInChildren<Animator>().SetBool("isDead", true);
             StopAllCoroutines();
         }
@@ -139,18 +143,6 @@ public class MainStats : MonoBehaviour
         if(MainStatsEvent != null)
             MainStatsEvent.Invoke();
     }
-    /* public void UpdateStats()
-     {
-         strength = playerInventory.attributeTypes[0].value.ModifiedValue;
-         dexterity = playerInventory.attributeTypes[1].value.ModifiedValue;
-         intelligence = playerInventory.attributeTypes[2].value.ModifiedValue;
-         maxHealth = (int)((baseHealth + statsPerLevel * level.currentLevel) * Mathf.Pow(UtilityClass.percentIncreasedPerStr, strength)) +
-             playerInventory.attributeTypes[3].value.ModifiedValue;
-         maxMana = (int)((baseMana + statsPerLevel * level.currentLevel) * Mathf.Pow(UtilityClass.percentIncreasedPerInt, intelligence)) + 
-             playerInventory.attributeTypes[4].value.ModifiedValue;
-         currentAtkPoint = playerInventory.attributeTypes[5].value.ModifiedValue;
-         currentDefPoint = playerInventory.attributeTypes[6].value.ModifiedValue;
-     }*/
 
     public void AddBaseAttributes()
     {
@@ -162,7 +154,6 @@ public class MainStats : MonoBehaviour
                 return;
             }
         }
-
         baseStr += Convert.ToInt32(mainAttributeChanges[0].GetComponent<TextMeshProUGUI>().text);
         baseDex += Convert.ToInt32(mainAttributeChanges[1].GetComponent<TextMeshProUGUI>().text);
         baseInt += Convert.ToInt32(mainAttributeChanges[2].GetComponent<TextMeshProUGUI>().text);
@@ -196,16 +187,13 @@ public class MainStats : MonoBehaviour
     {
         if (IsEnoughMana(manaUsed))
             currentMana -= manaUsed;
-        else
-        {
-            //Play sound not enough mana
-        }
     }
 
     public bool IsEnoughMana(float manaUsed)
     {
         if (currentMana >= manaUsed)
             return true;
+        FindObjectOfType<AudioManager>().Play("Mana");
         return false;
     }
 }
@@ -220,4 +208,6 @@ public static class UtilityClass
     {
         return dmg * (1 / (1 + def * 0.01f));
     }
+
+    public static int activeNumber = 0;
 }

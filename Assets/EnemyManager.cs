@@ -27,6 +27,7 @@ public class EnemyManager : MonoBehaviour
         {
             if (collider.CompareTag("Player"))
             {
+                FindObjectOfType<AudioManager>().Play("MonsterHit");
                 float playerDef = collider.GetComponent<MainStats>().currentDefPoint;
                 collider.GetComponent<MainStats>().TakeDamage(UtilityClass.DamageAfterDef(enemyStat.baseDamage, playerDef));
             }
@@ -35,6 +36,7 @@ public class EnemyManager : MonoBehaviour
 
     public void RoarAttack()
     {
+        FindObjectOfType<AudioManager>().Play("Roar");
         Instantiate(roarEffectPrefab, transform.position, Quaternion.identity);
         Collider[] colliders = Physics.OverlapSphere(enemyStat.gameObject.transform.position, ((MutantBoss)enemyStat).roarRadius);
         foreach (Collider collider in colliders)
@@ -43,13 +45,14 @@ public class EnemyManager : MonoBehaviour
             {
                 float playerDef = collider.GetComponent<MainStats>().currentDefPoint;
                 collider.GetComponent<MainStats>().TakeDamage(UtilityClass.DamageAfterDef(enemyStat.baseDamage, playerDef));
-                print("Player get rooted status");
+                //print("Player get rooted status");
             }
         }
     }
 
     public void StompAttack()
     {
+        FindObjectOfType<AudioManager>().Play("Stomp");
         Instantiate(slamEffectPrefab, stompPointPos.position + Vector3.up*0.1f, Quaternion.identity);
         Collider[] colliders = Physics.OverlapSphere(stompPointPos.position, ((MutantBoss)enemyStat).stompRadius);
         foreach (Collider collider in colliders)
