@@ -1,14 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.AI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Level))]
 public class MainStats : MonoBehaviour
 {
+    string savePath = "/Stats.save";
+    [SerializeField]
+    [HideInInspector]
+    SavePlayerInfo savedInfo;
     bool isDead = false;
     public GameObject statsSheetRef;
     bool hasStatsSheetInitiated = false;
@@ -21,17 +28,24 @@ public class MainStats : MonoBehaviour
     public GameObject manaUI;
     Image healthFill;
     Image manaFill;
-    public Level level;
+    Level level;
+    [HideInInspector]
     public float maxHealth;
+    [HideInInspector]
     public float maxMana;
+    [HideInInspector]
     public float currentHealth;
+    [HideInInspector]
     public float currentMana;
+    [HideInInspector]
     public float healthRegen;
+    [HideInInspector]
     public float manaRegen;
     public const float baseHealth = 100;
     public const float baseMana = 100;
     const int statsPerLevel = 12;
     public const int BaseMovemenSpeed = 5;
+    [HideInInspector]
     public float currentMoveSpeed;
     public int strength;
     public int dexterity;
@@ -41,7 +55,62 @@ public class MainStats : MonoBehaviour
     public int baseInt;
     public int currentAtkPoint;
     public int currentDefPoint;
+    QuestManager questManager;
 
+    public void LoadStats()
+    {
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+        {
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Open, FileAccess.Read);
+            savedInfo = (SavePlayerInfo)formatter.Deserialize(stream);
+            stream.Close();
+            baseStr = savedInfo.baseStr;
+            baseDex = savedInfo.baseDex;
+            baseInt = savedInfo.baseInt;
+            if (level != null)
+            {
+                level.currentLevel = savedInfo.currentLevel;
+                level.currentExp = savedInfo.currentExp;
+                level.nextLevelExp = savedInfo.nextLevelExp;
+                level.pointToAllocate = savedInfo.pointToAllocate;
+            }
+            if (questManager != null)
+            {
+                questManager.receivedQuests = savedInfo.savedQuests;
+                QuestUI questUI = FindObjectOfType<QuestUI>();
+                if (questUI != null)
+                {
+                    questUI.UpdateQuestUI();
+                }
+            }
+            NavMeshAgent agent = GetComponent<NavMeshAgent>();
+            agent.nextPosition = new Vector3(savedInfo.x, savedInfo.y, savedInfo.z);
+            ResetStats();
+        }
+    }
+
+    public void SaveStats()
+    {
+        savedInfo = new SavePlayerInfo();
+        savedInfo.baseStr = baseStr;
+        savedInfo.baseDex = baseDex;
+        savedInfo.baseInt = baseInt;
+        savedInfo.currentLevel = level.currentLevel;
+        savedInfo.currentExp = level.currentExp;
+        savedInfo.nextLevelExp = level.nextLevelExp;
+        savedInfo.pointToAllocate = level.pointToAllocate;
+        savedInfo.x = transform.position.x;
+        savedInfo.y = transform.position.y;
+        savedInfo.z = transform.position.z;
+        if (questManager != null)
+            savedInfo.savedQuests = questManager.receivedQuests;
+        IFormatter formatter = new BinaryFormatter();
+        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create, FileAccess.Write);
+        formatter.Serialize(stream, savedInfo);
+        stream.Close();
+        //Application.persistentDataPath = %userprofile%\AppData\LocalLow\<companyname>\<productname>
+    }
     IEnumerator Regeneration()
     {
         while (true) 
@@ -55,17 +124,23 @@ public class MainStats : MonoBehaviour
     }
     public void SetBeginningAttributes()
     {
-        baseStr = 6;
-        baseDex = 6;
-        baseInt = 12;
+        savedInfo = new SavePlayerInfo();
+        savedInfo.baseStr = 6;
+        savedInfo.baseDex = 6;
+        savedInfo.baseInt = 12;
+        savedInfo.currentLevel = 0;
+        savedInfo.currentExp = 0;
+        savedInfo.nextLevelExp = 0;
+        savedInfo.pointToAllocate = 0;
     }
     private void Start()
     {
-        SetBeginningAttributes();
-        playerInventory = GetComponent<PlayerInventoryManager>();
         level = GetComponent<Level>();
+        questManager = GetComponent<QuestManager>();
+        playerInventory = GetComponent<PlayerInventoryManager>();
         for (int i = 0; i < playerInventory.attributeTypes.Length; i++)
         {
+            //print($"Register mod event: {playerInventory.attributeTypes[i].attributeType}");
             playerInventory.attributeTypes[i].value.RegisterModEvent(ResetStats);
         }
         ResetStats();
@@ -90,8 +165,7 @@ public class MainStats : MonoBehaviour
 
         if (currentHealth <= 0 && !isDead)
         {
-            isDead = true;  
-            print("isDead: true");
+            isDead = true;
             currentHealth = 0;
             FindObjectOfType<AudioManager>().Play("PlayerDeath");
             gameObject.GetComponentInChildren<Animator>().SetBool("isDead", true);
@@ -107,6 +181,10 @@ public class MainStats : MonoBehaviour
         if (!hasStatsSheetInitiated)
         {
             //Load player's base stats
+            if (UtilityClass.loadSavedFiles)
+            {
+                LoadStats();
+            }
             statsSheetRef.SetActive(false);
             hasStatsSheetInitiated = true;  
         }
@@ -196,6 +274,31 @@ public class MainStats : MonoBehaviour
         FindObjectOfType<AudioManager>().Play("Mana");
         return false;
     }
+
+    private void OnDestroy()
+    {
+        level.LevelEvent -= ResetStats;
+        for (int i = 0; i < playerInventory.attributeTypes.Length; i++)
+        {
+            //print($"Unregister mod event: {playerInventory.attributeTypes[i].attributeType}");
+            playerInventory.attributeTypes[i].value.UnregisterModEvent(ResetStats);
+        }
+    }
+}
+[System.Serializable]
+public class SavePlayerInfo
+{
+    public int baseStr;
+    public int baseDex;
+    public int baseInt;
+    public int currentLevel;
+    public int currentExp;
+    public int nextLevelExp;
+    public int pointToAllocate;
+    public List<Quest> savedQuests;
+    public float x;
+    public float y;
+    public float z;
 }
 
 public static class UtilityClass
@@ -210,4 +313,5 @@ public static class UtilityClass
     }
 
     public static int activeNumber = 0;
+    public static bool loadSavedFiles = false;
 }

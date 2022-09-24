@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && !PauseMenu.gameIsPause)
         {
             CastXSpellToMousePos("basicSpellAtk");
         }

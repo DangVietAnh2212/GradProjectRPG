@@ -31,7 +31,8 @@ public class ShortKeyManager : MonoBehaviour
             refToItemInSlot = null;
         }
             
-        if (Input.GetKeyDown(keyCode) && 
+        if (!PauseMenu.gameIsPause &&
+            Input.GetKeyDown(keyCode) && 
             refToItemInSlot != null &&
             !refToItemInSlot.isStackable &&
             playerMainStat.IsEnoughMana(refToItemInSlot.spell.manaCost) &&

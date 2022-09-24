@@ -91,11 +91,11 @@ NavMeshAgent:
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
-  m_AutoRepath: 1
+  m_AutoRepath: 0
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!136 &3698000117684735171
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -223,6 +223,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fe5477cfe4b73459118aafd9eae850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savedInfo:
+    baseStr: 0
+    baseDex: 0
+    baseInt: 0
+    currentLevel: 0
+    currentExp: 0
+    nextLevelExp: 0
+    pointToAllocate: 0
+    savedQuests: []
+    x: 0
+    y: 0
+    z: 0
   statsSheetRef: {fileID: 0}
   mainAttributeChanges:
   - {fileID: 0}
@@ -232,7 +244,6 @@ MonoBehaviour:
   manaText: {fileID: 0}
   healthUI: {fileID: 0}
   manaUI: {fileID: 0}
-  level: {fileID: 0}
   maxHealth: 0
   maxMana: 0
   currentHealth: 0
@@ -268,10 +279,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   levelUpButtonRef: {fileID: 0}
+  pointToAllocate: 0
   expUI: {fileID: 0}
   expText: {fileID: 0}
   currentLevel: 0
   currentExp: 0
+  nextLevelExp: 0
   expMulEachLv: 1.25
 --- !u!114 &1429634897
 MonoBehaviour:

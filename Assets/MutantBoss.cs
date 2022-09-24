@@ -43,6 +43,7 @@ public class MutantBoss : Enemy
         if(agent != null)
         {
             if(distanceToPlayer > detectionRadius && !isPatrolling &&
+                distanceToPlayer <= updatedAnimationRadius &&
                 !animator.GetCurrentAnimatorStateInfo(0).IsName("MainLayer.Roar") &&
                 !animator.GetCurrentAnimatorStateInfo(0).IsName("MainLayer.Stomp"))
             {

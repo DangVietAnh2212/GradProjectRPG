@@ -18,15 +18,16 @@ public class PlayerInventoryManager : MonoBehaviour
 
 
     private BoneCombiner boneCombiner;
-
-    private void Start()
+    private void Awake()
     {
-        boneCombiner = new BoneCombiner(gameObject);
         for (int i = 0; i < attributeTypes.Length; i++)
         {
             attributeTypes[i].SetParent(this);
         }
-
+    }
+    private void Start()
+    {
+        boneCombiner = new BoneCombiner(gameObject);
         for (int i = 0; i < equipmentInventory.GetSlots.Length; i++)
         {
             equipmentInventory.GetSlots[i].OnBeforeUpdate += OnRemoveItem;
@@ -99,7 +100,6 @@ public class PlayerInventoryManager : MonoBehaviour
                 break;
             case InterfaceType.Equipment:
                 //Debug.Log(string.Concat("Placed ", inventorySlot.ItemSO, "on ", inventorySlot.parent.inventory.interfaceType, ", Allowed Items: ", string.Join(", ", inventorySlot.allowedItems)));
-
                 for (int i = 0; i < inventorySlot.inventoryItem.buffs.Length; i++)
                 {
                     for (int j = 0; j < attributeTypes.Length; j++)
@@ -136,36 +136,33 @@ public class PlayerInventoryManager : MonoBehaviour
                 break;
         }
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            inventory.Save();
-            equipmentInventory.Save();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Return)) 
-        {
-            inventory.Load();
-            equipmentInventory.Load();
-        }
-    }
-
+    
     private void LateUpdate()
     {
         if (!hasInventoryInitiated)
         {
-            inventory.Load();
-            equipmentInventory.Load();
+            if (UtilityClass.loadSavedFiles)
+            {
+                inventory.Load();
+                equipmentInventory.Load();
+            }
             inventoryPanel.SetActive(false);
             hasInventoryInitiated = true;
         }
     }
 
+    private void OnDestroy()
+    {
+        for (int i = 0; i < equipmentInventory.GetSlots.Length; i++)
+        {
+            equipmentInventory.GetSlots[i].OnBeforeUpdate -= OnRemoveItem;
+            equipmentInventory.GetSlots[i].OnAfterUpdate -= OnAddItem;
+        }
+    }
+
     public void AttributeModifierNotice(AttributeManager attribute)
     {
-        //Debug.Log(string.Concat(attribute.attributeType, " was updated! The value is now:  ", attribute.value.ModifiedValue));
-        
+        Debug.Log(string.Concat(attribute.attributeType, " was updated! The value is now:  ", attribute.value.ModifiedValue));
     }
 
     private void OnApplicationQuit()

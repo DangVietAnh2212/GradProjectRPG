@@ -13,10 +13,6 @@ public class IceSpearBehaviour : SpellBehaviour
     static float childDuration;
     static float childAOE;
 
-    private void Awake()
-    {
-
-    }
     protected override void Start()
     {
         if (!haveForked)
@@ -45,6 +41,8 @@ public class IceSpearBehaviour : SpellBehaviour
         {
             FindObjectOfType<AudioManager>().Play("IceShot");
             currentAngle = baseAngle * localAOE / baseAOE;
+            if (currentAngle > 360f)
+                currentAngle = 360f;
             GameObject firstSpear = Instantiate(gameObject, transform.position, Quaternion.LookRotation(transform.forward));
             firstSpear.transform.Rotate(Vector3.up * -currentAngle / 2);
             firstSpear.GetComponent<IceSpearBehaviour>().haveForked = true;

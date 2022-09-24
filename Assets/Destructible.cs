@@ -23,7 +23,7 @@ public class Destructible : Interactable
             int randomID = Random.Range(0, (int)(itemDatabaseSO.itemSOs.Length * 1.5f));
             if (randomID < itemDatabaseSO.itemSOs.Length)
             {
-                GroundItem groundItem = Instantiate(groundItemPref, transform.position + Vector3.up * 1.5f, Quaternion.identity).GetComponent<GroundItem>();
+                GroundItem groundItem = Instantiate(groundItemPref, transform.position + Vector3.up * 1f, Quaternion.identity).GetComponent<GroundItem>();
                 groundItem.item = itemDatabaseSO.itemSOs[randomID];
                 groundItem.gameObject.GetComponent<BillBoard>().cam = cam;
             }

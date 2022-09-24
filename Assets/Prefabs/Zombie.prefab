@@ -482,7 +482,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 1
 --- !u!114 &8008979997756725015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -495,6 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27b50d08041ad6b4aabaa03f4461f9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterType: 0
   itemSpawnPref: {fileID: 2099179160034430516, guid: 51b35f2705a935446817ddf9117b995e, type: 3}
   itemDatabase: {fileID: 11400000, guid: 49b47ad216edaf14295fea2846028b5a, type: 2}
   minMaxHealth: {x: 100, y: 300}

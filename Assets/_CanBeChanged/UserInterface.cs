@@ -27,8 +27,6 @@ public abstract class UserInterface : MonoBehaviour
             inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
         }
         CreateInventorySlots();
-        /*AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });
-        AddEvent(gameObject, EventTriggerType.PointerExit, delegate { OnExitInterface(gameObject); });*/
     }
 
     public void OnSlotUpdate(InventorySlot slot)
@@ -123,22 +121,6 @@ public abstract class UserInterface : MonoBehaviour
         itemInform.gameObject.SetActive(false);
     }
 
-    /*public void OnEnterInterface(GameObject obj)
-    {
-        MouseData.interfaceWhenMouseIsOver = obj.GetComponent<UserInterface>();
-    }
-    public void OnExitInterface(GameObject obj)
-    {
-        //Unity has bug
-        //MouseData.interfaceWhenMouseIsOver = null;
-
-    }
-
-    public void OnDragStart(GameObject obj)
-    {
-        MouseData.tempItemBeingDragged = CreateTempItem(obj);
-    }*/
-
     public GameObject CreateTempItem(GameObject obj)
     {
         GameObject tempItem = null;
@@ -152,30 +134,6 @@ public abstract class UserInterface : MonoBehaviour
         }
         return tempItem;
     }
-
-    /*public void OnDragEnd(GameObject obj)
-    {
-        Destroy(MouseData.tempItemBeingDragged);
-        if(MouseData.interfaceWhenMouseIsOver == null)
-        {
-            slotsOnInterface[obj].RemoveItem();
-            return;
-        }
-
-        if(MouseData.slotHoverOver != null)
-        {
-            InventorySlot mouseHoverSlotData = MouseData.interfaceWhenMouseIsOver.slotsOnInterface[MouseData.slotHoverOver];
-            inventory.SwapItemInSlot(slotsOnInterface[obj], mouseHoverSlotData);
-        }
-    }
-
-    public void OnDrag(GameObject obj)
-    {
-        if (MouseData.tempItemBeingDragged != null)
-        {
-            MouseData.tempItemBeingDragged.GetComponent<RectTransform>().position = Input.mousePosition;
-        }
-    }*/
 
     public void OnClick(GameObject obj)
     {
@@ -225,11 +183,6 @@ public abstract class UserInterface : MonoBehaviour
 
 public static class MouseData
 {
-    public static UserInterface interfaceWhenMouseIsOver;
-    public static GameObject tempItemBeingDragged;
-    //this part is not doing anything right now
-
-
     public static GameObject slotHoverOver;
     public static GameObject itemOnMouseDisplay;
     public static Color colorOfItemOnMouse;

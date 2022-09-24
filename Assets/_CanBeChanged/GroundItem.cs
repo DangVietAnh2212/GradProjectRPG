@@ -19,7 +19,6 @@ public class GroundItem : Interactable, ISerializationCallbackReceiver
     }
     public override void Interact()
     {
-        print("Pick up " + this);
         var playerInventory = player.GetComponent<PlayerInventoryManager>().inventory;
         if(isNew == true)
         {

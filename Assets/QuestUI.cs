@@ -8,6 +8,7 @@ public class QuestUI : MonoBehaviour
     public GameObject collapsibleBody;
     public GameObject questTextBox;
     public GameObject playerRef;
+    [HideInInspector]
     List<Quest> quests;
     TextMeshProUGUI questTitle;
     TextMeshProUGUI questDes;
@@ -19,6 +20,7 @@ public class QuestUI : MonoBehaviour
 
     public void UpdateQuestUI()
     {
+        quests = playerRef.GetComponent<QuestManager>().receivedQuests;
         for (int i = collapsibleBody.transform.childCount - 1; i >= 0; i--)
         {
             Transform transform = collapsibleBody.transform.GetChild(i);

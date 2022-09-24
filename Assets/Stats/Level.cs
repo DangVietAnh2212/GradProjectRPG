@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +11,8 @@ public class Level : MonoBehaviour
     public GameObject unallocatedPointText;
     public GameObject[] unallocatedPointBtns;
     public GameObject levelUpButtonRef;
-    int pointToAllocate = 0;
+    [HideInInspector]
+    public int pointToAllocate = 0;
     public GameObject expUI;
     public GameObject expText;
     Image expFill;
@@ -22,13 +21,15 @@ public class Level : MonoBehaviour
     public int currentLevel = 0;
     public const int baseExpBeforeLvup = 100;
     public int currentExp = 0;
-    private int nextLevelExp;
+    [HideInInspector]
+    public int nextLevelExp;
     public float expMulEachLv = 1.25f;
 
     private void Start()
     {
         nextLevelExp = GetNextLevelExp();
         expFill = expUI.GetComponent<Image>();
+        GetComponent<MainStats>().MainStatsEvent += UpdateLevelText;
         LevelEvent += UpdateLevelText;
     }
     private void Update()
@@ -54,7 +55,6 @@ public class Level : MonoBehaviour
                 unallocatedPointBtns[i].SetActive(false);
             }
         }
-        UpdatePointToAllocateText();
     }
 
     private void LateUpdate()
@@ -64,6 +64,7 @@ public class Level : MonoBehaviour
             expFill.fillAmount = (float)currentExp / nextLevelExp;
             expText.GetComponent<TextMeshProUGUI>().text = $"{currentExp}/{nextLevelExp}";
         }
+        UpdatePointToAllocateText();
     }
 
     public int GetNextLevelExp()

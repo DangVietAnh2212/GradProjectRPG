@@ -12,7 +12,7 @@ public class AttributeManager
     public void SetParent(PlayerInventoryManager player)
     {
         parent = player;
-        value = new ModifiableInt(AttributeModified);
+        value = new ModifiableInt();
     }
 
     public void AttributeModified()

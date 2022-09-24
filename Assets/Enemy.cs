@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     public float attackRange = 0.3f;
     protected Animator animator;
     protected float detectionRadius = 15f;
+    protected float updatedAnimationRadius = 30f;
     protected float stoppingDistance = 1.2f;
     protected Vector3 patrolPoint;
     protected bool isPatrolling = false;
@@ -37,6 +38,7 @@ public class Enemy : MonoBehaviour
     public EnemyHealthBar healthBar;
     public TextMeshProUGUI healthText;
     float baseExp = 50f;
+    IEnumerator randomPointCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +51,8 @@ public class Enemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = 3.5f;
         attackRange = 0.3f;
-        StartCoroutine(RandomPoint(10f, 5f));
+        randomPointCoroutine = RandomPoint(10f, 5f);
+        StartCoroutine(randomPointCoroutine);
         isPatrolling = true;
     }
 
@@ -58,33 +61,37 @@ public class Enemy : MonoBehaviour
     {
         if(agent != null)
         {
-            if (Vector3.Distance(player.transform.position, agent.transform.position) <= detectionRadius)
+            float distanceToPlayer = Vector3.Distance(player.transform.position, agent.transform.position);
+            if (distanceToPlayer <= detectionRadius)
             {
-                StopCoroutine(RandomPoint(10f, 5f));
+                StopCoroutine(randomPointCoroutine);
                 isPatrolling = false;
                 FollowPlayer(player.transform);
                 FaceTarget();
             }
 
-            if (Vector3.Distance(player.transform.position, agent.transform.position) > detectionRadius)
+            if (distanceToPlayer > detectionRadius && distanceToPlayer <= updatedAnimationRadius)
             {
                 if (!isPatrolling)
                 {
-                    StartCoroutine(RandomPoint(10f, 5f));
+                    StartCoroutine(randomPointCoroutine);
                     isPatrolling = true;
                 }
-                StopFollowingPlayer();
-                MoveTo(patrolPoint);
+                if (isPatrolling)
+                {
+                    StopFollowingPlayer();
+                    MoveTo(patrolPoint);
+                }
             }
 
-            if (Vector3.Distance(player.transform.position, agent.transform.position) <= stoppingDistance)
+            if (distanceToPlayer <= stoppingDistance)
             {
                 agent.isStopped = true;
                 FaceTarget();
                 animator.SetTrigger("isAttacking");
             }
 
-            if (Vector3.Distance(player.transform.position, agent.transform.position) > stoppingDistance)
+            if (distanceToPlayer > stoppingDistance)
             {
                 animator.SetTrigger("toNormal");
             }
@@ -103,6 +110,7 @@ public class Enemy : MonoBehaviour
             startDespawntime = Time.time;
             agent.isStopped = true;
             agent.updatePosition = false;
+            agent.enabled = false;
             agent = null;
             StopAllCoroutines();
             animator.SetBool("isDead", true);

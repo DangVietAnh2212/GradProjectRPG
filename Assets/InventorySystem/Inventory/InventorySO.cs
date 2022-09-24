@@ -127,12 +127,11 @@ public class InventorySO : ScriptableObject
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, saveData);
         file.Close();*/
-
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, slotsContainer);
         stream.Close();
-        Debug.Log("Saved");
+        //Debug.Log("Saved");
     }
 
     [ContextMenu("Load")]
@@ -318,6 +317,4 @@ public class InventorySlot
         }
         return false;
     }
-
-
 }
