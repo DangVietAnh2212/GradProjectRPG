@@ -16,10 +16,12 @@ public class MainStats : MonoBehaviour
     [SerializeField]
     [HideInInspector]
     SavePlayerInfo savedInfo;
-    bool isDead = false;
+    [HideInInspector]
+    public bool isDead = false;
     public GameObject statsSheetRef;
     bool hasStatsSheetInitiated = false;
     public event Action MainStatsEvent;
+    public event Action OnPlayerDeath;
     public GameObject[] mainAttributeChanges;
     PlayerInventoryManager playerInventory;
     public GameObject healthText;
@@ -157,12 +159,6 @@ public class MainStats : MonoBehaviour
         if (currentMana > maxMana)
             currentMana = maxMana;
 
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            currentHealth -= 100;
-            currentMana -= 100;
-        }
-
         if (currentHealth <= 0 && !isDead)
         {
             isDead = true;
@@ -170,6 +166,8 @@ public class MainStats : MonoBehaviour
             FindObjectOfType<AudioManager>().Play("PlayerDeath");
             gameObject.GetComponentInChildren<Animator>().SetBool("isDead", true);
             StopAllCoroutines();
+            if (OnPlayerDeath != null)
+                OnPlayerDeath.Invoke();
         }
 
         if (currentMana <= 0)

@@ -1,10 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject playerDeathBG;
+
+    public GameObject playerDeathPanel;
+
     public static bool gameIsPause = false;
 
     public GameObject pauseMenuUI;
@@ -14,6 +17,12 @@ public class PauseMenu : MonoBehaviour
     public InventorySO inventory;
     public InventorySO equipment;
     public ItemDatabaseSO itemDatabase;
+
+    private void Start()
+    {
+        gameIsPause = false;
+        playerRef.OnPlayerDeath += PlayerDeath;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -29,15 +38,34 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    public void PlayerDeath()
+    {
+        StartCoroutine(PlayerDeathCoroutine());
+    }
+
+    IEnumerator PlayerDeathCoroutine()
+    {
+        playerDeathBG.SetActive(true);
+        gameIsPause = true;
+        yield return new WaitForSeconds(3.5f);
+        playerDeathPanel.SetActive(true);
+        StopAllCoroutines();
+        Time.timeScale = 0f;
+    }
+
     public void Resume()
     {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
-        gameIsPause = false;
+        if (!playerRef.isDead)
+        {
+            pauseMenuUI.SetActive(false);
+            Time.timeScale = 1f;
+            gameIsPause = false;
+        }
     }
 
     public void Pause()
     {
+        playerDeathBG.SetActive(false);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsPause = true; 

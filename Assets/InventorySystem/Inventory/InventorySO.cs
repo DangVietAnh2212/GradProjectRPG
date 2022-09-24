@@ -2,7 +2,6 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using System;
 public enum InterfaceType
 {
     Inventory,
@@ -122,11 +121,6 @@ public class InventorySO : ScriptableObject
     [ContextMenu("Save")]
     public void Save()
     {
-        /*string saveData = JsonUtility.ToJson(this, true);
-        FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
-        BinaryFormatter bf = new BinaryFormatter();
-        bf.Serialize(file, saveData);
-        file.Close();*/
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, slotsContainer);
@@ -139,10 +133,6 @@ public class InventorySO : ScriptableObject
     {
         if(File.Exists(string.Concat(Application.persistentDataPath, savePath)))
         {
-            /*FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
-            BinaryFormatter bf = new BinaryFormatter();
-            JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
-            file.Close();   */
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Open, FileAccess.Read);
             Inventory newSlotsContainer = (Inventory)formatter.Deserialize(stream);

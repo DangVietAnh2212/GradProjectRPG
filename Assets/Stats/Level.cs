@@ -34,9 +34,6 @@ public class Level : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-            currentExp += 20;
-
         UpdateLevel();
 
         if (pointToAllocate > 0)

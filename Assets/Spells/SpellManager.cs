@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpellManager : MonoBehaviour
 {
     public GameObject basicSpellPrefab;
+    [HideInInspector]
     public GameObject spellPrefab;
     public Transform spellSpawnPosTransform;
 
