@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class BlinkingButton : MonoBehaviour
 {
-    string testDepo;
     Image image;
 
     void OnEnable()
